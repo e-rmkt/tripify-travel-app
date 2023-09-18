@@ -2,9 +2,9 @@ import TripList from "@/components/TripList";
 
 export default function HomePage() {
   return (
-    <div>
+    <main>
       <h1>TravelApp</h1>
       <TripList />
-    </div>
+    </main>
   );
 }
