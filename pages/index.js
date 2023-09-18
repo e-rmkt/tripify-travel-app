@@ -1,7 +1,10 @@
+import TripList from "@/components/TripList";
+
 export default function HomePage() {
   return (
-    <div>
-      <h1>Hello from Next.js</h1>
-    </div>
+    <main>
+      <h1>TravelApp</h1>
+      <TripList />
+    </main>
   );
 }
