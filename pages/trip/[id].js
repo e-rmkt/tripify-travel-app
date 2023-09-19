@@ -1,5 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
+import Location from "@/components/Location";
+import TimePeriod from "@/components/TimePeriod";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 
@@ -24,12 +26,15 @@ export default function TripDetails() {
     <main>
       <h1>Travel App</h1>
       <Link href="/"> ← back </Link>
+      <br />
       <Image src={img} width={150} height={100} alt="Dummy Pic" />
-      {location.map((location) => `${location.country}, ${location.city}`)}
+      <br />
+      <Location location={location} />
+      <br />
+      <TimePeriod timePeriod={timePeriod} />
+      <br />
       {title}
-      {timePeriod.map(
-        (timePeriod) => `${timePeriod.startDate} ${timePeriod.endDate}`
-      )}
+      <br />
     </main>
   );
 }
