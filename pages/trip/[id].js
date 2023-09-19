@@ -15,8 +15,6 @@ export default function TripDetails() {
     fetcher
   );
 
-  console.log(trips);
-
   if (!trips || isLoading) {
     return <>is Loading...</>;
   }
