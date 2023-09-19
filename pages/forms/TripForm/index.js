@@ -1,10 +1,44 @@
+import useSWR from "swr";
 import CreateButton from "@/components/CreateButton";
-
 import CancelButton from "@/components/CancelButton";
 
 export default function TripForm() {
+  const { mutate } = useSWR("/api/trips");
+
+  async function handleAddTrip(event) {
+    event.preventDefault();
+
+    const formData = new FormData(event.target);
+    const tripData = Object.fromEntries(formData);
+
+    const newTrip = {
+      title: tripData.title,
+      location: [{ country: tripData.country, city: tripData.city }],
+      timePeriod: [
+        { startDate: tripData.startDate, endDate: tripData.endDate },
+      ],
+    };
+
+    const response = await fetch("/api/trips", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newTrip),
+    });
+
+    if (!response.ok) {
+      console.error(response.status);
+      return;
+    }
+
+    mutate();
+    event.target.reset();
+    window.location.href = "/";
+  }
+
   return (
-    <form>
+    <form onSubmit={handleAddTrip}>
       <label>
         Country
         <input
@@ -30,11 +64,11 @@ export default function TripForm() {
       </label>
       <label>
         Start date
-        <input name="Start date" type="date" required />
+        <input name="startDate" type="date" required />
       </label>
       <label>
         End date
-        <input name="End date" type="date" />
+        <input name="endDate" type="date" />
       </label>
       <CreateButton />
       <CancelButton />
