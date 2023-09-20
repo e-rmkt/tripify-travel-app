@@ -13,4 +13,15 @@ export default async function handler(request, response) {
     }
     response.status(200).json(trip);
   }
+
+  if (request.method === "DELETE") {
+    try {
+      const trip = await Trip.findOneAndDelete({ _id: request.query.id });
+      response.status(200).json(trip);
+    } catch (error) {
+      console.log("DELETE /api/trips/:id", error);
+      response.status(500).json({ message: "Error deleting trip" });
+    }
+    return;
+  }
 }
