@@ -2,13 +2,12 @@ import { styled } from "styled-components";
 import Link from "next/link";
 
 export const StyledCancelButton = styled(Link)`
-  background-color: red;
-  writing-mode: horizontal-tb !important;
+  background-color: #ff0000;
   margin: 0em;
-  padding-inline: 6px;
+  padding: 0 6px;
   border-style: outset;
   border-color: buttonborder;
   font-size: 13px;
   text-decoration: none;
-  color: white;
+  color: #ffffff;
 `;

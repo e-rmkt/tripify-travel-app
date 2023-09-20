@@ -1,9 +1,11 @@
 import useSWR from "swr";
 import CreateButton from "@/components/CreateButton";
 import CancelButton from "@/components/CancelButton";
+import { useRouter } from "next/router";
 
 export default function TripForm() {
   const { mutate } = useSWR("/api/trips");
+  const router = useRouter();
 
   async function handleAddTrip(event) {
     event.preventDefault();
@@ -33,8 +35,7 @@ export default function TripForm() {
     }
 
     mutate();
-    event.target.reset();
-    window.location.href = "/";
+    router.push("/");
   }
 
   return (
