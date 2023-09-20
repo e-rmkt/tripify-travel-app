@@ -19,6 +19,15 @@ export default function TripDetails() {
   if (!trips || isLoading) {
     return <>is Loading...</>;
   }
+
+  async function handleDelete() {
+    console.log("TEST");
+    await fetch(`/api/trips/${id}`, {
+      method: "DELETE",
+    });
+    router.push("/");
+  }
+
   const { title, location, timePeriod, img } = trips;
 
   return (
@@ -34,7 +43,7 @@ export default function TripDetails() {
       <br />
       {title}
       <br />
-      <DeleteButton />
+      <DeleteButton onHandleDelete={handleDelete} />
     </main>
   );
 }
