@@ -7,17 +7,7 @@ export default async function handler(request, response) {
   if (request.method === "GET") {
     const trips = await Trip.find();
     return response.status(200).json(trips);
+  } else {
+    return response.status(405).json({ message: "Method not allowed" });
   }
-
-  if (request.method === "POST") {
-    try {
-      const tripData = request.body;
-      await Trip.create(tripData);
-
-      response.status(201).json({ status: "Trip created" });
-    } catch (error) {
-      response.status(400).json({ message: error.message });
-    }
-  }
-  return response.status(405).json({ message: "Method not allowed" });
 }
