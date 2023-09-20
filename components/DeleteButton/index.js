@@ -1,5 +1,9 @@
 import { StyledDeleteButton } from "./DeleteButton.styled";
 
-export default function DeleteButton() {
-  return <StyledDeleteButton type="submit">Delete</StyledDeleteButton>;
+export default function DeleteButton({ onHandleDelete }) {
+  return (
+    <StyledDeleteButton type="button" onClick={onHandleDelete}>
+      Delete
+    </StyledDeleteButton>
+  );
 }
