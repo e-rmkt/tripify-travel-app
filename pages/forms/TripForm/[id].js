@@ -15,7 +15,7 @@ export default function TripDetailsForm() {
   );
 
   if (!trips || isLoading) {
-    return <>is Loading...</>;
+    return <h2>is Loading...</h2>;
   }
   const { title, location, timePeriod, img } = trips;
   const country = location.map((location) => `${location.country}`);
@@ -37,21 +37,24 @@ export default function TripDetailsForm() {
       ],
     };
 
-    const response = await fetch(`/api/trips/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(editedTrip),
-    });
+    try {
+      const response = await fetch(`/api/trips/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(editedTrip),
+      });
 
-    if (!response.ok) {
-      console.error(response.status);
-      return;
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      mutate();
+      router.push(`/trip/${id}`);
+    } catch (error) {
+      console.error("Error updating trip:", error);
     }
-
-    mutate();
-    router.push(`/trip/${id}`);
   }
 
   return (
