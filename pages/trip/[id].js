@@ -21,7 +21,6 @@ export default function TripDetails() {
   }
 
   async function handleDelete() {
-    console.log("TEST");
     await fetch(`/api/trips/${id}`, {
       method: "DELETE",
     });
