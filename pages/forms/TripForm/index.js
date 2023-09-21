@@ -1,7 +1,7 @@
-import useSWR from "swr";
-import CreateButton from "@/components/CreateButton";
 import CancelButton from "@/components/CancelButton";
+import CreateButton from "@/components/CreateButton";
 import { useRouter } from "next/router";
+import useSWR from "swr";
 
 export default function TripForm() {
   const { mutate } = useSWR("/api/trips");
@@ -71,7 +71,7 @@ export default function TripForm() {
         End date
         <input name="endDate" type="date" />
       </label>
-      <CreateButton />
+      <CreateButton>Create</CreateButton>
       <CancelButton />
     </form>
   );
