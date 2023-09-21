@@ -1,3 +1,4 @@
+import EditButton from "@/components/EditButton";
 import Image from "next/image";
 import Link from "next/link";
 import Location from "@/components/Location";
@@ -33,6 +34,7 @@ export default function TripDetails() {
       <br />
       {title}
       <br />
+      <EditButton id={id} />
     </main>
   );
 }
