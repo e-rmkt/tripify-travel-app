@@ -12,14 +12,11 @@ export default async function handler(request, response) {
       return response.status(404).json({ status: "Not found" });
     }
     response.status(200).json(trip);
-  }
-
-  if (request.method === "PUT") {
+  } else if (request.method === "PUT") {
     const updatedTrip = request.body;
     await Trip.findByIdAndUpdate(id, updatedTrip);
     response.status(200).json({ status: `Trip ${id} successfully updated!` });
-
-  if (request.method === "DELETE") {
+  } else if (request.method === "DELETE") {
     try {
       const trip = await Trip.findByIdAndDelete(id);
       response.status(200).json(trip);
@@ -28,6 +25,7 @@ export default async function handler(request, response) {
       response.status(500).json({ message: "Error deleting service" });
     }
     return;
-
+  } else {
+    return;
   }
 }
