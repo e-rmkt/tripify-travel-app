@@ -13,9 +13,21 @@ export default async function handler(request, response) {
     }
     response.status(200).json(trip);
   }
+
   if (request.method === "PUT") {
     const updatedTrip = request.body;
     await Trip.findByIdAndUpdate(id, updatedTrip);
     response.status(200).json({ status: `Trip ${id} successfully updated!` });
+
+  if (request.method === "DELETE") {
+    try {
+      const trip = await Trip.findByIdAndDelete(id);
+      response.status(200).json(trip);
+    } catch (error) {
+      console.log("DELETE /api/trips/:id", error);
+      response.status(500).json({ message: "Error deleting service" });
+    }
+    return;
+
   }
 }
