@@ -58,29 +58,36 @@ export default function TripDetailsForm() {
   }
 
   return (
-    <form onSubmit={handleEditTrip}>
-      <label>
-        Country
-        <input name="country" defaultValue={country} minLength={3} required />
-      </label>
-      <label>
-        City
-        <input name="city" defaultValue={city} />
-      </label>
-      <label>
-        Title
-        <input name="title" defaultValue={title} minLength={3} required />
-      </label>
-      <label>
-        Start date
-        <input name="startDate" type="date" defaultValue={startDate} required />
-      </label>
-      <label>
-        End date
-        <input name="endDate" type="date" defaultValue={endDate} />
-      </label>
-      <CreateButton>Save</CreateButton>
+    <>
+      <form onSubmit={handleEditTrip}>
+        <label>
+          Country
+          <input name="country" defaultValue={country} minLength={3} required />
+        </label>
+        <label>
+          City
+          <input name="city" defaultValue={city} />
+        </label>
+        <label>
+          Title
+          <input name="title" defaultValue={title} minLength={3} required />
+        </label>
+        <label>
+          Start date
+          <input
+            name="startDate"
+            type="date"
+            defaultValue={startDate}
+            required
+          />
+        </label>
+        <label>
+          End date
+          <input name="endDate" type="date" defaultValue={endDate} />
+        </label>
+        <CreateButton>Save</CreateButton>
+      </form>
       <CancelButton />
-    </form>
+    </>
   );
 }
