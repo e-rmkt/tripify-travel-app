@@ -1,10 +1,11 @@
+import DeleteButton from "@/components/DeleteButton";
+import EditButton from "@/components/EditButton";
 import Image from "next/image";
 import Link from "next/link";
 import Location from "@/components/Location";
 import TimePeriod from "@/components/TimePeriod";
 import { useRouter } from "next/router";
 import useSWR from "swr";
-import DeleteButton from "@/components/DeleteButton";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
@@ -17,7 +18,7 @@ export default function TripDetails() {
   );
 
   if (!trips || isLoading) {
-    return <>is Loading...</>;
+    return <h2>is Loading...</h2>;
   }
 
   async function handleDelete() {
@@ -42,6 +43,7 @@ export default function TripDetails() {
       <br />
       {title}
       <br />
+      <EditButton id={id} />
       <DeleteButton onHandleDelete={handleDelete} />
     </main>
   );
