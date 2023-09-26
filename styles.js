@@ -10,12 +10,19 @@ export default createGlobalStyle`
   body {
     margin: 0;
     padding: 0 20px;
-    font-family: system-ui;
+    font-family: Sans-serif;
   }
 
   a:link, 
   a:visited {
 color: #252525;
+
+  }
+
+h1 {
+font-size: 24px;
+font-weight: 600;
+color: #448cff;
 
   }
 
