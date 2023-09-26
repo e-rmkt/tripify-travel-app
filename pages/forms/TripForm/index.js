@@ -1,3 +1,5 @@
+import { StyledForm, StyledInput, StyledLabel } from "./TripForm.styled";
+
 import CancelButton from "@/components/CancelButton";
 import CreateButton from "@/components/CreateButton";
 import { useRouter } from "next/router";
@@ -45,42 +47,43 @@ export default function TripForm() {
   }
 
   return (
-    <>
-      <form onSubmit={handleAddTrip}>
-        <label>
+    <main>
+      <h1>New Trip</h1>
+      <StyledForm onSubmit={handleAddTrip}>
+        <StyledLabel>
           Country
-          <input
+          <StyledInput
             name="country"
             placeholder="Country of your trip"
             minLength={3}
             required
             autoFocus
           />
-        </label>
-        <label>
+        </StyledLabel>
+        <StyledLabel>
           City
-          <input name="city" placeholder="City of your trip" />
-        </label>
-        <label>
+          <StyledInput name="city" placeholder="City of your trip" />
+        </StyledLabel>
+        <StyledLabel>
           Title
-          <input
+          <StyledInput
             name="title"
             placeholder="Title of your trip"
             minLength={3}
             required
           />
-        </label>
-        <label>
+        </StyledLabel>
+        <StyledLabel>
           Start date
-          <input name="startDate" type="date" required />
-        </label>
-        <label>
+          <StyledInput name="startDate" type="date" required />
+        </StyledLabel>
+        <StyledLabel>
           End date
-          <input name="endDate" type="date" />
-        </label>
+          <StyledInput name="endDate" type="date" />
+        </StyledLabel>
         <CreateButton>Create</CreateButton>
-      </form>
+      </StyledForm>
       <CancelButton />
-    </>
+    </main>
   );
 }
