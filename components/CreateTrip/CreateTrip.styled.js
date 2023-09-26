@@ -2,7 +2,9 @@ import { styled } from "styled-components";
 import Link from "next/link";
 
 export const StyledLink = styled(Link)`
-  position: absolute;
+  position: fixed;
+  left: 50%;
+  bottom: 10px;
   border: 0.125rem solid #ffa573;
   background-color: #ffa573;
   display: flex;
