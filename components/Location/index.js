@@ -1,5 +1,7 @@
 export default function Location({ location }) {
   return (
-    <>{location.map((location) => `${location.country}, ${location.city}`)}</>
+    <h2>
+      {location.map((location) => `${location.country}, ${location.city}`)}
+    </h2>
   );
 }
