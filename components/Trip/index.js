@@ -1,21 +1,18 @@
-import Image from "next/image";
-import Link from "next/link";
 import Location from "../Location";
 import TimePeriod from "../TimePeriod";
+import { StyledList, Wrapper, StyledLink, StyledImage } from "./Trip.styled";
 
 export default function Trip({ title, img, location, timePeriod, _id }) {
   return (
-    <Link href={`/trip/${_id}`}>
-      <li>
-        <Image src={img} width={150} height={100} alt="Dummy Pic" />
-        <br />
-        {title}
-        <br />
-        <Location location={location} />
-        <br />
-        <TimePeriod timePeriod={timePeriod} />
-        <br />
-      </li>
-    </Link>
+    <StyledLink href={`/trip/${_id}`}>
+      <StyledList>
+        <StyledImage src={img} width={150} height={100} alt="Dummy Pic" />
+        <Wrapper>
+          <Location location={location} />
+          <h3>{title}</h3>
+          <TimePeriod timePeriod={timePeriod} />
+        </Wrapper>
+      </StyledList>
+    </StyledLink>
   );
 }
