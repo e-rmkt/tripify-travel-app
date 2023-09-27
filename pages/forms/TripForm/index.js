@@ -14,7 +14,7 @@ export default function TripForm() {
     const tripData = Object.fromEntries(formData);
 
     const repTripDataCountry = tripData.country.replace(" ", "");
-    const repTripDataCity = tripData.city.replace(" ", "");
+    const repTripDataCity = tripData.city.replace(" ", "-");
 
     const newTrip = {
       title: tripData.title,
@@ -23,8 +23,8 @@ export default function TripForm() {
         { startDate: tripData.startDate, endDate: tripData.endDate },
       ],
       img: `${repTripDataCity}`
-        ? `https://source.unsplash.com/1920x1080?${repTripDataCountry},${repTripDataCity}`
-        : `https://source.unsplash.com/1920x1080?${repTripDataCountry}`,
+        ? `https://source.unsplash.com/random/?${repTripDataCountry}-${repTripDataCity}`
+        : `https://source.unsplash.com/random/?${repTripDataCountry}`,
     };
 
     const response = await fetch("/api/trips", {
