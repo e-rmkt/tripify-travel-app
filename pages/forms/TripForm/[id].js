@@ -29,14 +29,19 @@ export default function TripDetailsForm() {
     const formData = new FormData(event.target);
     const tripData = Object.fromEntries(formData);
 
+    const repTripDataCountry = tripData.country.replace(" ", "");
+    const repTripDataCity = tripData.city.replace(" ", "-");
+
     const editedTrip = {
       title: tripData.title,
       location: [{ country: tripData.country, city: tripData.city }],
       timePeriod: [
         { startDate: tripData.startDate, endDate: tripData.endDate },
       ],
+      img: `${repTripDataCity}`
+        ? `https://source.unsplash.com/random/?${repTripDataCountry}-${repTripDataCity}`
+        : `https://source.unsplash.com/random/?${repTripDataCountry}`,
     };
-
     try {
       const response = await fetch(`/api/trips/${id}`, {
         method: "PUT",
