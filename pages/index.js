@@ -4,7 +4,7 @@ import CreateTrip from "@/components/CreateTrip";
 export default function HomePage() {
   return (
     <main>
-      <h1>TravelApp</h1>
+      <h1>My Trips</h1>
       <TripList />
       <CreateTrip />
     </main>
