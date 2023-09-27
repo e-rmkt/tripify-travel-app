@@ -1,4 +1,4 @@
-import { styled } from "styled-components";
+import styled from "styled-components";
 
 export const StyledCreateButton = styled.button`
   margin-top: 50px;

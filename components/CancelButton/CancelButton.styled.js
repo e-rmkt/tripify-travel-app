@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { styled } from "styled-components";
+import styled from "styled-components";
 
 export const StyledCancelButton = styled(Link)`
   width: 115px;
@@ -13,4 +13,7 @@ export const StyledCancelButton = styled(Link)`
   font-weight: 600;
   text-decoration: none;
   text-wrap: nowrap;
+  &:visited {
+    color: #ff003d;
+  }
 `;
