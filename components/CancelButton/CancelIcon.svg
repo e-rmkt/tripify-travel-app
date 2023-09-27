@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+            width="12"
+            height="11"
+            viewBox="0 0 12 11"
+            fill="none"
+          >
+            <path
+              d="M1 10L10.5715 1"
+              stroke="#FF003D"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M10.5715 10L1 1"
+              stroke="#FF003D"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
