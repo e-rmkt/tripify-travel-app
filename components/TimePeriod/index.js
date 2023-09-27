@@ -1,9 +1,9 @@
 export default function TimePeriod({ timePeriod }) {
   return (
-    <h4>
+    <time>
       {timePeriod.map(
         (timePeriod) => `${timePeriod.startDate} - ${timePeriod.endDate}`
       )}
-    </h4>
+    </time>
   );
 }

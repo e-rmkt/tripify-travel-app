@@ -39,13 +39,10 @@ font-weight: 400;
 margin:0;
 }
 
-h4 {
+time {
 font-size: 12px;
 font-weight: 400;
 margin:0;
-}
-p {
-  
 }
 
 `;
