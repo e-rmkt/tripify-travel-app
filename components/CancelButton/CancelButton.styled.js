@@ -2,12 +2,15 @@ import Link from "next/link";
 import { styled } from "styled-components";
 
 export const StyledCancelButton = styled(Link)`
-  background-color: #ff0000;
-  margin: 0em;
-  padding: 0 6px;
-  border-style: outset;
-  border-color: #000000;
-  font-size: 13px;
+  width: 115px;
+  height: 32px;
+  padding: 6px 23px;
+  border-radius: 13px;
+  border: 1px solid #ff003d;
+  background: #fff;
+  color: #ff003d;
+  font-size: 16px;
+  font-weight: 600;
   text-decoration: none;
-  color: #ffffff;
+  text-wrap: nowrap;
 `;
