@@ -29,3 +29,9 @@ export const StyledInput = styled.input`
     outline: none;
   }
 `;
+
+export const StyledContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 13px;
+`;
