@@ -1,12 +1,13 @@
+import {
+  StyledImage,
+  StyledLink,
+  StyledListItem,
+  StyledText,
+  Wrapper,
+} from "./Trip.styled";
+
 import Location from "../Location";
 import TimePeriod from "../TimePeriod";
-import {
-  StyledListItem,
-  Wrapper,
-  StyledLink,
-  StyledImage,
-  StyledText,
-} from "./Trip.styled";
 
 export default function Trip({ title, img, location, timePeriod, _id }) {
   return (

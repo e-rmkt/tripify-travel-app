@@ -1,5 +1,5 @@
-import { styled } from "styled-components";
 import Link from "next/link";
+import styled from "styled-components";
 
 export const StyledLink = styled(Link)`
   border: 0.125rem solid #ffa573;
