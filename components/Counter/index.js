@@ -2,7 +2,6 @@ import { formatDistanceToNow } from "date-fns";
 
 export default function Counter({ startDate, endDate }) {
   const date = new Date();
-  console.log(endDate, startDate);
   if (date < new Date(startDate)) {
     const countdown = formatDistanceToNow(new Date(startDate));
     return <p>in {countdown}</p>;
