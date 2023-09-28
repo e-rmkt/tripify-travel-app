@@ -1,6 +1,10 @@
 import { useRouter } from "next/router";
 import useSWR from "swr";
+<<<<<<< HEAD
 import TripDetails from "@/components/TripDetails";
+=======
+import Counter from "@/components/Counter";
+>>>>>>> 86292f1 (feat: add Counter to DetailsPage)
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
@@ -24,8 +28,11 @@ export default function TripDetailsPage() {
   }
 
   const { title, location, timePeriod, img } = trips;
+  const startDate = timePeriod.map((timePeriod) => `${timePeriod.startDate}`);
+  const endDate = timePeriod.map((timePeriod) => `${timePeriod.endDate}`);
 
   return (
+<<<<<<< HEAD
     <TripDetails
       title={title}
       location={location}
@@ -34,5 +41,24 @@ export default function TripDetailsPage() {
       timePeriod={timePeriod}
       id={id}
     />
+=======
+    <main>
+      <h1>Travel App</h1>
+      <Link href="/"> ← back </Link>
+      <br />
+      <Image src={img} width={150} height={100} alt="Dummy Pic" />
+      <br />
+      <Location location={location} />
+      <br />
+      <TimePeriod timePeriod={timePeriod} />
+      <br />
+      {title}
+      <br />
+      <Counter startDate={startDate} endDate={endDate} />
+      <br />
+      <EditButton id={id} />
+      <DeleteButton onHandleDelete={handleDelete} />
+    </main>
+>>>>>>> 86292f1 (feat: add Counter to DetailsPage)
   );
 }
