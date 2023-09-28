@@ -1,9 +1,8 @@
-import CancelButton from "@/components/CancelButton";
-import CreateButton from "@/components/CreateButton";
+import TripForm from "@/components/TripForm";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 
-export default function TripForm() {
+export default function TripFormPage() {
   const { mutate } = useSWR("/api/trips");
   const router = useRouter();
 
@@ -45,42 +44,9 @@ export default function TripForm() {
   }
 
   return (
-    <>
-      <form onSubmit={handleAddTrip}>
-        <label>
-          Country
-          <input
-            name="country"
-            placeholder="Country of your trip"
-            minLength={3}
-            required
-            autoFocus
-          />
-        </label>
-        <label>
-          City
-          <input name="city" placeholder="City of your trip" />
-        </label>
-        <label>
-          Title
-          <input
-            name="title"
-            placeholder="Title of your trip"
-            minLength={3}
-            required
-          />
-        </label>
-        <label>
-          Start date
-          <input name="startDate" type="date" required />
-        </label>
-        <label>
-          End date
-          <input name="endDate" type="date" />
-        </label>
-        <CreateButton>Create</CreateButton>
-      </form>
-      <CancelButton />
-    </>
+    <main>
+      <h1>New Trip</h1>
+      <TripForm handleAddTrip={handleAddTrip} />
+    </main>
   );
 }
