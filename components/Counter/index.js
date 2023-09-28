@@ -6,7 +6,7 @@ export default function Counter({ startDate, endDate }) {
     const countdown = formatDistanceToNow(new Date(startDate));
     return <p>in {countdown}</p>;
   } else if (date >= new Date(startDate) && date <= new Date(endDate)) {
-    return <p>you are on your trip right now</p>;
+    return <p>Ongoing</p>;
   } else {
     const countdown = formatDistanceToNow(new Date(endDate), date);
     return <p>{countdown} ago</p>;
