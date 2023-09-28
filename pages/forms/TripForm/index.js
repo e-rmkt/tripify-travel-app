@@ -8,20 +8,20 @@ export default function TripFormPage() {
   const router = useRouter();
 
   const [endDateDisabled, setEndDateDisabled] = useState(true);
-  const [endDate, setEndDate] = useState("");
+  // const [endDateValue, setEndDateValue] = useState();
 
   function handleDisabled(event) {
     setEndDateDisabled(!event.target.value);
   }
+  const endDateValue = "";
 
-  function handleEndDate(event) {
-    const endDate = event.target.value;
-    const startDate = document.getElementsByName("startDate");
-    if (endDate < startDate) {
-      alert("The end date has to be bigger or equal to the start date") &&
-        setEndDate(endDate === "");
-    } else {
-      return;
+  function handleEndDateValue(event) {
+    let endDateVal = event.target.value;
+    const startDateValue = document.getElementById("startDate").value;
+
+    if (endDateVal < startDateValue) {
+      alert("The end date has to be bigger or equal to the start date");
+      endDateVal = endDateValue;
     }
   }
 
