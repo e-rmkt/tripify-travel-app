@@ -2,7 +2,7 @@ import Link from "next/link";
 import styled from "styled-components";
 
 export const StyledCancelButton = styled(Link)`
-  width: 115px;
+  width: 117px;
   height: 32px;
   padding: 6px 23px;
   border-radius: 13px;
