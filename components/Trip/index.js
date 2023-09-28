@@ -10,14 +10,7 @@ import Location from "../Location";
 import TimePeriod from "../TimePeriod";
 import Counter from "../Counter";
 
-export default function Trip({
-  title,
-  img,
-  location,
-  timePeriod,
-  _id,
-  countdown,
-}) {
+export default function Trip({ title, img, location, timePeriod, _id }) {
   const startDate = timePeriod.map((timePeriod) => `${timePeriod.startDate}`);
   const endDate = timePeriod.map((timePeriod) => `${timePeriod.endDate}`);
 
