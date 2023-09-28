@@ -1,12 +1,17 @@
 import EditForm from "@/components/EditForm";
 import { useRouter } from "next/router";
 import useSWR from "swr";
+import { useState } from "react";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 export default function EditFormPage() {
   const { mutate } = useSWR("/api/trips");
   const router = useRouter();
+
+  const [endDateDisabled, setEndDateDisabled] = useState(false);
+  const [endDateValue, setEndDateValue] = useState();
+
   const { id } = router.query;
   const { data: trips, isLoading } = useSWR(
     id ? `/api/trips/${id}` : null,
@@ -16,11 +21,26 @@ export default function EditFormPage() {
   if (!trips || isLoading) {
     return <h2>is Loading...</h2>;
   }
+
   const { title, location, timePeriod, img } = trips;
   const country = location.map((location) => `${location.country}`);
   const city = location.map((location) => `${location.city}`);
   const startDate = timePeriod.map((timePeriod) => `${timePeriod.startDate}`);
   const endDate = timePeriod.map((timePeriod) => `${timePeriod.endDate}`);
+
+  function handleDisabled(event) {
+    setEndDateDisabled(!event.target.value);
+  }
+
+  function handleEndDateValue(event) {
+    const endDateValue = event.target.value;
+    const startDateValue = startDate;
+    // document.getElementsByName("startDate");
+    if (endDateValue < startDateValue) {
+      alert("The end date has to be bigger or equal to the start date") &&
+        setEndDateValue(endDate);
+    }
+  }
 
   async function handleEditTrip(event) {
     event.preventDefault();
