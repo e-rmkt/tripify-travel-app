@@ -1,10 +1,17 @@
 import TripForm from "@/components/TripForm";
 import { useRouter } from "next/router";
 import useSWR from "swr";
+import { useState } from "react";
 
 export default function TripFormPage() {
   const { mutate } = useSWR("/api/trips");
   const router = useRouter();
+
+  const [endDateDisabled, setEndDateDisabled] = useState(true);
+
+  function handleDisabled(event) {
+    setEndDateDisabled(!event.target.value);
+  }
 
   async function handleAddTrip(event) {
     event.preventDefault();
