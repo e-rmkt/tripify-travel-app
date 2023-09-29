@@ -26,6 +26,6 @@ export const StyledText = styled.p`
   margin: 0;
 `;
 
-// export const StyledImage = styled(Image)`
-//   border-radius: 13px;
-// `;
+export const StyledImage = styled(Image)`
+  border-radius: 13px;
+`;
