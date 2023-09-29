@@ -4,7 +4,7 @@ import {
   StyledImage,
   StyledText,
   Wrapper,
-} from "./TripDetails.styled";
+} from "../../components/page-styles/TripDetails.styled";
 
 import DeleteButton from "@/components/DeleteButton";
 import EditButton from "@/components/EditButton";
