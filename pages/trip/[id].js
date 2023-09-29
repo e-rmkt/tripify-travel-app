@@ -1,6 +1,13 @@
+import {
+  DetailsCard,
+  Header,
+  StyledImage,
+  StyledText,
+  Wrapper,
+} from "./TripDetails.styled";
+
 import DeleteButton from "@/components/DeleteButton";
 import EditButton from "@/components/EditButton";
-import Image from "next/image";
 import Link from "next/link";
 import Location from "@/components/Location";
 import TimePeriod from "@/components/TimePeriod";
@@ -32,19 +39,21 @@ export default function TripDetails() {
 
   return (
     <main>
-      <h1>Travel App</h1>
-      <Link href="/"> ← back </Link>
-      <br />
-      <Image src={img} width={150} height={100} alt="Dummy Pic" />
-      <br />
-      <Location location={location} />
-      <br />
-      <TimePeriod timePeriod={timePeriod} />
-      <br />
-      {title}
-      <br />
-      <EditButton id={id} />
-      <DeleteButton onHandleDelete={handleDelete} />
+      <Header>
+        <h1>Your Trip</h1>
+        <Link href="/"> ← back </Link>
+      </Header>
+      <StyledImage src={img} width={335} height={300} alt="Dummy Pic" />
+      <DetailsCard>
+        <Location location={location} />
+        <StyledText>{title}</StyledText>
+        <TimePeriod timePeriod={timePeriod} />
+      </DetailsCard>
+      <Wrapper>
+        <EditButton id={id} />
+
+        <DeleteButton onHandleDelete={handleDelete} />
+      </Wrapper>
     </main>
   );
 }
