@@ -16,6 +16,7 @@ export default createGlobalStyle`
   a:link, 
   a:visited {
 color: #252525;
+text-decoration: none;
 
   }
 
