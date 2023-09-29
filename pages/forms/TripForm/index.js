@@ -8,7 +8,6 @@ export default function TripFormPage() {
   const router = useRouter();
 
   const [endDateDisabled, setEndDateDisabled] = useState(true);
-  const [endDateValue, setEndDateValue] = useState();
 
   function handleDisabled(event) {
     setEndDateDisabled(!event.target.value);
@@ -48,7 +47,6 @@ export default function TripFormPage() {
     }
     if (tripData.endDate < tripData.startDate) {
       alert("The end date needs to be bigger than the start date!");
-      setEndDateValue("");
     } else {
       mutate();
       router.push("/");
