@@ -8,18 +8,10 @@ export default function TripFormPage() {
   const router = useRouter();
 
   const [endDateDisabled, setEndDateDisabled] = useState(true);
+  const [endDateValue, setEndDateValue] = useState();
 
   function handleDisabled(event) {
     setEndDateDisabled(!event.target.value);
-  }
-
-  function handleEndDateValue(event) {
-    const endDate = event.target.value;
-    if (endDate < startDate.value) {
-      alert("The end date needs to be bigger than the start date!");
-      event.target.value = new Date("");
-    }
-    return;
   }
 
   async function handleAddTrip(event) {
@@ -54,9 +46,13 @@ export default function TripFormPage() {
       console.error(response.status);
       return;
     }
-
-    mutate();
-    router.push("/");
+    if (tripData.endDate < tripData.startDate) {
+      alert("The end date needs to be bigger than the start date!");
+      setEndDateValue("");
+    } else {
+      mutate();
+      router.push("/");
+    }
   }
 
   return (
