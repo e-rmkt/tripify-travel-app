@@ -10,6 +10,7 @@ export default function EditFormPage() {
   const router = useRouter();
 
   const [endDateDisabled, setEndDateDisabled] = useState(false);
+  const [endDateValue, setEndDateValue] = useState();
 
   const { id } = router.query;
   const { data: trips, isLoading } = useSWR(
@@ -27,18 +28,8 @@ export default function EditFormPage() {
   const startDate = timePeriod.map((timePeriod) => `${timePeriod.startDate}`);
   const endDate = timePeriod.map((timePeriod) => `${timePeriod.endDate}`);
 
-  function handleDisabled(event) {
+  function toggleDisabled(event) {
     setEndDateDisabled(!event.target.value);
-  }
-
-  function handleEndDateValue(event) {
-    const endDate = event.target.value;
-    const startDate = document.getElementsByName("startDate")[0].value;
-    if (endDate < startDate) {
-      alert("The end date needs to be bigger than the start date!");
-      event.target.value = new Date("");
-    }
-    return;
   }
 
   async function handleEditTrip(event) {
@@ -73,8 +64,12 @@ export default function EditFormPage() {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
 
-      mutate();
-      router.push(`/trip/${id}`);
+      if (tripData.endDate < tripData.startDate) {
+        alert("The end date needs to be bigger than the start date!");
+        setEndDateValue("");
+      } else {
+        router.push(`/trip/${id}`);
+      }
     } catch (error) {
       console.error("Error updating trip:", error);
     }
