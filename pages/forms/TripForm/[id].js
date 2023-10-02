@@ -13,16 +13,16 @@ export default function EditFormPage() {
   const [endDateValue, setEndDateValue] = useState();
 
   const { id } = router.query;
-  const { data: trips, isLoading } = useSWR(
+  const { data: trip, isLoading } = useSWR(
     id ? `/api/trips/${id}` : null,
     fetcher
   );
 
-  if (!trips || isLoading) {
+  if (!trip || isLoading) {
     return <h2>is Loading...</h2>;
   }
 
-  const { title, location, timePeriod, img } = trips;
+  const { title, location, timePeriod, img } = trip;
   const country = location.map((location) => `${location.country}`);
   const city = location.map((location) => `${location.city}`);
   const startDate = timePeriod.map((timePeriod) => `${timePeriod.startDate}`);
