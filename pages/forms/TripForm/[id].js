@@ -48,29 +48,28 @@ export default function EditFormPage() {
         ? `https://source.unsplash.com/random/?${repTripDataCountry}-${repTripDataCity}`
         : `https://source.unsplash.com/random/?${repTripDataCountry}`,
     };
-    try {
-      const response = await fetch(`/api/trips/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(editedTrip),
-      });
+    if (tripData.endDate < tripData.startDate) {
+      alert("The end date needs to be bigger than the start date!");
+    } else {
+      try {
+        const response = await fetch(`/api/trips/${id}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(editedTrip),
+        });
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
 
-      if (tripData.endDate < tripData.startDate) {
-        alert("The end date needs to be bigger than the start date!");
-      } else {
         router.push(`/trip/${id}`);
+      } catch (error) {
+        console.error("Error updating trip:", error);
       }
-    } catch (error) {
-      console.error("Error updating trip:", error);
     }
   }
-
   return (
     <EditForm
       country={country}
