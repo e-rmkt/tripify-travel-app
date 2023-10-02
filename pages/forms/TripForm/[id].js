@@ -23,10 +23,8 @@ export default function EditFormPage() {
   }
 
   const { title, location, timePeriod, img } = trip;
-  const country = location.map((location) => `${location.country}`);
-  const city = location.map((location) => `${location.city}`);
-  const startDate = timePeriod.map((timePeriod) => `${timePeriod.startDate}`);
-  const endDate = timePeriod.map((timePeriod) => `${timePeriod.endDate}`);
+  const { country, city } = location[0];
+  const { startDate, endDate } = timePeriod[0];
 
   function toggleDisabled(event) {
     setEndDateDisabled(!event.target.value);
