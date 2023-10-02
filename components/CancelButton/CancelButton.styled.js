@@ -4,7 +4,10 @@ import styled from "styled-components";
 export const StyledCancelButton = styled(Link)`
   width: 117px;
   height: 32px;
-  padding: 6px 23px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 22px;
   border-radius: 13px;
   border: 1px solid #ff003d;
   background: #fff;

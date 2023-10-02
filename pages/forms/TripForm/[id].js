@@ -1,11 +1,10 @@
-import CancelButton from "@/components/CancelButton";
-import CreateButton from "@/components/CreateButton";
+import EditForm from "@/components/EditForm";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
-export default function TripDetailsForm() {
+export default function EditFormPage() {
   const { mutate } = useSWR("/api/trips");
   const router = useRouter();
   const { id } = router.query;
@@ -63,36 +62,13 @@ export default function TripDetailsForm() {
   }
 
   return (
-    <>
-      <form onSubmit={handleEditTrip}>
-        <label>
-          Country
-          <input name="country" defaultValue={country} minLength={3} required />
-        </label>
-        <label>
-          City
-          <input name="city" defaultValue={city} />
-        </label>
-        <label>
-          Title
-          <input name="title" defaultValue={title} minLength={3} required />
-        </label>
-        <label>
-          Start date
-          <input
-            name="startDate"
-            type="date"
-            defaultValue={startDate}
-            required
-          />
-        </label>
-        <label>
-          End date
-          <input name="endDate" type="date" defaultValue={endDate} />
-        </label>
-        <CreateButton>Save</CreateButton>
-      </form>
-      <CancelButton />
-    </>
+    <EditForm
+      country={country}
+      city={city}
+      title={title}
+      startDate={startDate}
+      endDate={endDate}
+      handleEditTrip={handleEditTrip}
+    />
   );
 }

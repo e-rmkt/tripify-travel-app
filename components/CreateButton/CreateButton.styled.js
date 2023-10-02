@@ -10,4 +10,8 @@ export const StyledCreateButton = styled.button`
   font-size: 16px;
   font-weight: 600;
   color: #1ab900;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  justify-content: center;
 `;
