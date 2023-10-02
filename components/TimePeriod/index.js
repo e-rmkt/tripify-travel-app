@@ -7,12 +7,7 @@ export default function TimePeriod({ timePeriod }) {
       <DateIcon />
       <time>
         {timePeriod.map(
-          (timePeriod) =>
-            `${
-              !timePeriod.endDate
-                ? `${timePeriod.startDate}`
-                : `${timePeriod.startDate} - ${timePeriod.endDate}`
-            }`
+          (timePeriod) => `${timePeriod.startDate} - ${timePeriod.endDate}`
         )}
       </time>
     </DateContainer>
