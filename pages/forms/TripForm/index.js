@@ -56,7 +56,11 @@ export default function TripFormPage() {
   return (
     <main>
       <h1>New Trip</h1>
-      <TripForm handleAddTrip={handleAddTrip} />
+      <TripForm
+        handleAddTrip={handleAddTrip}
+        handleDisabled={handleDisabled}
+        endDateDisabled={endDateDisabled}
+      />
     </main>
   );
 }

@@ -22,11 +22,7 @@ export default function Trip({ title, img, location, timePeriod, _id }) {
           <Location location={location} />
           <StyledText>{title}</StyledText>
           <TimePeriod timePeriod={timePeriod} />
-          <Counter
-            startDate={startDate}
-            endDate={endDate}
-            countdown={countdown}
-          />
+          <Counter startDate={startDate} endDate={endDate} />
         </Wrapper>
       </StyledListItem>
     </StyledLink>

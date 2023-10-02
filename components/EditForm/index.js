@@ -17,6 +17,8 @@ export default function EditForm({
   startDate,
   endDate,
   handleEditTrip,
+  toggleDisabled,
+  endDateDisabled,
 }) {
   return (
     <>
@@ -51,11 +53,17 @@ export default function EditForm({
             type="date"
             defaultValue={startDate}
             required
+            onChange={toggleDisabled}
           />
         </StyledLabel>
         <StyledLabel>
           End date
-          <StyledInput name="endDate" type="date" defaultValue={endDate} />
+          <StyledInput
+            name="endDate"
+            type="date"
+            defaultValue={endDate}
+            disabled={endDateDisabled}
+          />
         </StyledLabel>
         <CreateButton>
           <CreateIcon /> Save

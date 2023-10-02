@@ -10,7 +10,6 @@ export default function EditFormPage() {
   const router = useRouter();
 
   const [endDateDisabled, setEndDateDisabled] = useState(false);
-  const [endDateValue, setEndDateValue] = useState();
 
   const { id } = router.query;
   const { data: trip, isLoading } = useSWR(
@@ -64,7 +63,6 @@ export default function EditFormPage() {
 
       if (tripData.endDate < tripData.startDate) {
         alert("The end date needs to be bigger than the start date!");
-        setEndDateValue("");
       } else {
         router.push(`/trip/${id}`);
       }
@@ -81,6 +79,8 @@ export default function EditFormPage() {
       startDate={startDate}
       endDate={endDate}
       handleEditTrip={handleEditTrip}
+      toggleDisabled={toggleDisabled}
+      endDateDisabled={endDateDisabled}
     />
   );
 }
