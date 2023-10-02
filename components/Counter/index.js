@@ -1,14 +1,16 @@
 import { formatDistanceToNow } from "date-fns";
 
 export default function Counter({ startDate, endDate }) {
-  const date = new Date();
-  if (date < new Date(startDate)) {
-    const countdown = formatDistanceToNow(new Date(startDate));
+  const now = new Date();
+  const start = new Date(startDate);
+  if (now < start) {
+    const countdown = formatDistanceToNow(start);
     return <p>in {countdown}</p>;
-  } else if (date >= new Date(startDate) && date <= new Date(endDate)) {
-    return <p>Ongoing</p>;
-  } else {
-    const countdown = formatDistanceToNow(new Date(endDate), date);
-    return <p>{countdown} ago</p>;
   }
+  const end = new Date(endDate);
+  if (now >= start && now <= end) {
+    return <p>Ongoing</p>;
+  }
+  const countdown = formatDistanceToNow(end, now);
+  return <p>{countdown} ago</p>;
 }
