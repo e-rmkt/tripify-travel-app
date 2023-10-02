@@ -1,26 +1,33 @@
 import EditForm from "@/components/EditForm";
 import { useRouter } from "next/router";
 import useSWR from "swr";
+import { useState } from "react";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 export default function EditFormPage() {
   const { mutate } = useSWR("/api/trips");
   const router = useRouter();
+
+  const [endDateDisabled, setEndDateDisabled] = useState(false);
+
   const { id } = router.query;
-  const { data: trips, isLoading } = useSWR(
+  const { data: trip, isLoading } = useSWR(
     id ? `/api/trips/${id}` : null,
     fetcher
   );
 
-  if (!trips || isLoading) {
+  if (!trip || isLoading) {
     return <h2>is Loading...</h2>;
   }
-  const { title, location, timePeriod, img } = trips;
-  const country = location.map((location) => `${location.country}`);
-  const city = location.map((location) => `${location.city}`);
-  const startDate = timePeriod.map((timePeriod) => `${timePeriod.startDate}`);
-  const endDate = timePeriod.map((timePeriod) => `${timePeriod.endDate}`);
+
+  const { title, location, timePeriod, img } = trip;
+  const { country, city } = location[0];
+  const { startDate, endDate } = timePeriod[0];
+
+  function toggleDisabled(event) {
+    setEndDateDisabled(!event.target.value);
+  }
 
   async function handleEditTrip(event) {
     event.preventDefault();
@@ -54,8 +61,11 @@ export default function EditFormPage() {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
 
-      mutate();
-      router.push(`/trip/${id}`);
+      if (tripData.endDate < tripData.startDate) {
+        alert("The end date needs to be bigger than the start date!");
+      } else {
+        router.push(`/trip/${id}`);
+      }
     } catch (error) {
       console.error("Error updating trip:", error);
     }
@@ -69,6 +79,8 @@ export default function EditFormPage() {
       startDate={startDate}
       endDate={endDate}
       handleEditTrip={handleEditTrip}
+      toggleDisabled={toggleDisabled}
+      endDateDisabled={endDateDisabled}
     />
   );
 }

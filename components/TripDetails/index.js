@@ -11,6 +11,7 @@ import Location from "../Location";
 import TimePeriod from "../TimePeriod";
 import EditButton from "../EditButton";
 import DeleteButton from "../DeleteButton";
+import Counter from "../Counter";
 
 export default function TripDetails({
   title,
@@ -19,6 +20,8 @@ export default function TripDetails({
   img,
   handleDelete,
   id,
+  startDate,
+  endDate,
 }) {
   return (
     <>
@@ -31,10 +34,10 @@ export default function TripDetails({
         <Location location={location} />
         <StyledText>{title}</StyledText>
         <TimePeriod timePeriod={timePeriod} />
+        <Counter startDate={startDate} endDate={endDate} />
       </DetailsCard>
       <Wrapper>
         <EditButton id={id} />
-
         <DeleteButton onHandleDelete={handleDelete} />
       </Wrapper>
     </>

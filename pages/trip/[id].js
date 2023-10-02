@@ -24,6 +24,8 @@ export default function TripDetailsPage() {
   }
 
   const { title, location, timePeriod, img } = trips;
+  const startDate = timePeriod.map((timePeriod) => `${timePeriod.startDate}`);
+  const endDate = timePeriod.map((timePeriod) => `${timePeriod.endDate}`);
 
   return (
     <TripDetails
@@ -33,6 +35,8 @@ export default function TripDetailsPage() {
       img={img}
       timePeriod={timePeriod}
       id={id}
+      startDate={startDate}
+      endDate={endDate}
     />
   );
 }

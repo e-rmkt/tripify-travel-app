@@ -10,7 +10,11 @@ import CancelIcon from "@/components/CancelButton/CancelIcon.svg";
 import CreateButton from "@/components/CreateButton";
 import CreateIcon from "@/components/CreateButton/CreateIcon.svg";
 
-export default function TripForm({ handleAddTrip }) {
+export default function TripForm({
+  handleAddTrip,
+  endDateDisabled,
+  handleDisabled,
+}) {
   return (
     <>
       <StyledForm onSubmit={handleAddTrip}>
@@ -39,11 +43,21 @@ export default function TripForm({ handleAddTrip }) {
         </StyledLabel>
         <StyledLabel>
           Start date
-          <StyledInput name="startDate" type="date" required />
+          <StyledInput
+            name="startDate"
+            type="date"
+            required
+            onChange={handleDisabled}
+          />
         </StyledLabel>
         <StyledLabel>
           End date
-          <StyledInput name="endDate" type="date" />
+          <StyledInput
+            name="endDate"
+            type="date"
+            required
+            disabled={endDateDisabled}
+          />
         </StyledLabel>
         <CreateButton>
           <CreateIcon /> Create

@@ -13,7 +13,7 @@ const tripSchema = new Schema({
   timePeriod: [
     {
       startDate: { type: String, required: true },
-      endDate: { type: String },
+      endDate: { type: String, required: true },
     },
   ],
   img: { type: String },

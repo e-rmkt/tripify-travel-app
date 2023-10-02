@@ -8,8 +8,12 @@ import {
 
 import Location from "../Location";
 import TimePeriod from "../TimePeriod";
+import Counter from "../Counter";
 
 export default function Trip({ title, img, location, timePeriod, _id }) {
+  const startDate = timePeriod.map((timePeriod) => `${timePeriod.startDate}`);
+  const endDate = timePeriod.map((timePeriod) => `${timePeriod.endDate}`);
+
   return (
     <StyledLink href={`/trip/${_id}`}>
       <StyledListItem>
@@ -18,6 +22,7 @@ export default function Trip({ title, img, location, timePeriod, _id }) {
           <Location location={location} />
           <StyledText>{title}</StyledText>
           <TimePeriod timePeriod={timePeriod} />
+          <Counter startDate={startDate} endDate={endDate} />
         </Wrapper>
       </StyledListItem>
     </StyledLink>
