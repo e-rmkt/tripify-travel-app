@@ -9,28 +9,45 @@ import CancelButton from "@/components/CancelButton";
 import CancelIcon from "@/components/CancelButton/CancelIcon.svg";
 import CreateButton from "@/components/CreateButton";
 import CreateIcon from "@/components/CreateButton/CreateIcon.svg";
+import { Country, City } from "country-state-city";
+import { useState } from "react";
 
 export default function TripForm({
   handleAddTrip,
   endDateDisabled,
   handleDisabled,
 }) {
+  const countries = Country.getAllCountries();
+  const [isoCode, setIsoCode] = useState(countries[0].isoCode);
+  const cities = City.getCitiesOfCountry(isoCode);
+
+  function handleIsoCode(event) {
+    setIsoCode(event.target.value);
+  }
   return (
     <>
       <StyledForm onSubmit={handleAddTrip}>
         <StyledLabel>
           Country
-          <StyledInput
-            name="country"
-            placeholder="Country of your trip"
-            minLength={3}
-            required
-            autoFocus
-          />
+          <select name="country" onChange={handleIsoCode} required>
+            {countries.map(({ isoCode, flag, name }) => (
+              <option key={isoCode} value={isoCode}>
+                {name} {flag}
+              </option>
+            ))}
+          </select>
         </StyledLabel>
         <StyledLabel>
           City
-          <StyledInput name="city" placeholder="City of your trip" />
+          <select name="city" required>
+            {cities
+              .filter(({ countryCode }) => countryCode === isoCode)
+              .map(({ latitude, longitude, name, stateCode }) => (
+                <option key={`${latitude}-${longitude}-${name}`}>
+                  {name} - {stateCode}
+                </option>
+              ))}
+          </select>
         </StyledLabel>
         <StyledLabel>
           Title
