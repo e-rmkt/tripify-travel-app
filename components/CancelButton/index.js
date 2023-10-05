@@ -14,7 +14,7 @@ export default function CancelButton({ children }) {
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           Are you sure you want to discard your changes?
-          <StyledLink href="/">Yes</StyledLink>
+          <StyledLink href="javascript:history.back()">Yes</StyledLink>
           <button type="button" onClick={() => setShowModal(false)}>
             No
           </button>
