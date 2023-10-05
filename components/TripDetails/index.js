@@ -18,10 +18,10 @@ export default function TripDetails({
   location,
   timePeriod,
   img,
-  handleDelete,
   id,
   startDate,
   endDate,
+  handleDelete,
 }) {
   return (
     <>
@@ -38,7 +38,10 @@ export default function TripDetails({
       </DetailsCard>
       <Wrapper>
         <EditButton id={id} />
-        <DeleteButton onHandleDelete={handleDelete} />
+        <DeleteButton
+          onHandleDelete={handleDelete}
+          onClick={() => setShowModal(true)}
+        />
       </Wrapper>
     </>
   );
