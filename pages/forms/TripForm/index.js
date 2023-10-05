@@ -1,11 +1,10 @@
 import TripForm from "@/components/TripForm";
-import { useRouter } from "next/router";
+
 import useSWR from "swr";
 import { useState } from "react";
 
 export default function TripFormPage() {
   const { mutate } = useSWR("/api/trips");
-  const router = useRouter();
 
   const [endDateDisabled, setEndDateDisabled] = useState(true);
 
@@ -35,23 +34,23 @@ export default function TripFormPage() {
 
     if (tripData.endDate < tripData.startDate) {
       alert("The end date needs to be bigger than the start date!");
-    } else {
-      const response = await fetch("/api/trips", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newTrip),
-      });
-
-      if (!response.ok) {
-        console.error(response.status);
-        return;
-      }
-
-      mutate();
-      router.push("/");
+      return;
     }
+
+    const response = await fetch("/api/trips", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newTrip),
+    });
+
+    if (!response.ok) {
+      console.error(response.status);
+      return;
+    }
+
+    mutate();
   }
 
   return (
