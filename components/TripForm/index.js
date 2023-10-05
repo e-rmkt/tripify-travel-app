@@ -24,9 +24,24 @@ export default function TripForm({
   function handleIsoCode(event) {
     setIsoCode(event.target.value);
   }
+
+  function onSubmit(event) {
+    event.preventDefault();
+    const data = Object.fromEntries(new FormData(event.target));
+    const isoCode = event.target.country.value;
+    const { name } = Country.getCountryByCode(isoCode);
+    handleAddTrip({
+      ...data,
+      country: {
+        name,
+        isoCode,
+      },
+    });
+  }
+
   return (
     <>
-      <StyledForm onSubmit={handleAddTrip}>
+      <StyledForm onSubmit={onSubmit}>
         <StyledLabel>
           Country
           <select name="country" onChange={handleIsoCode} required>
