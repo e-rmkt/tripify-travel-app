@@ -1,7 +1,6 @@
-import Link from "next/link";
 import styled from "styled-components";
 
-export const StyledCancelButton = styled(Link)`
+export const StyledCancelButton = styled.button`
   width: 117px;
   height: 32px;
   display: flex;
