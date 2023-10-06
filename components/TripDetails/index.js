@@ -12,7 +12,6 @@ import TimePeriod from "../TimePeriod";
 import EditButton from "../EditButton";
 import DeleteButton from "../DeleteButton";
 import Counter from "../Counter";
-import Weather from "../Weather";
 
 export default function TripDetails({
   title,
@@ -36,7 +35,6 @@ export default function TripDetails({
         <StyledText>{title}</StyledText>
         <TimePeriod timePeriod={timePeriod} />
         <Counter startDate={startDate} endDate={endDate} />
-        <Weather />
       </DetailsCard>
       <Wrapper>
         <EditButton id={id} />
