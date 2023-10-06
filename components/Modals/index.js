@@ -6,34 +6,9 @@ import {
   StyledModalOverlay,
   StyledModalBody,
   StyledModalHeader,
+  StyledHeading,
 } from "./Modals.styled";
 
-const Modal = ({ onClose, children, title }) => {
-  const handleCloseClick = (event) => {
-    event.preventDefault();
-    onClose();
-  };
-
-  const modalContent = (
-    <StyledModalOverlay>
-      <StyledModelWrapper>
-        <StyledModal>
-          <StyledModalHeader>
-            <a href="#" onClick={handleCloseClick}>
-              x
-            </a>
-          </StyledModalHeader>
-          {title && <h1>{title}</h1>}
-          <StyledModalBody>{children}</StyledModalBody>
-        </StyledModal>
-      </StyledModelWrapper>
-    </StyledModalOverlay>
-  );
-
-  return ReactDOM.createPortal(
-    modalContent,
-    document.getElementById("modal-root")
-  );
-};
-
-export default Modal;
+export default function Modal({ children }) {
+  return <div>{children}</div>;
+}
