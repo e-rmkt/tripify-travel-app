@@ -55,17 +55,34 @@ export default function WeatherList() {
 
   const { precipitation_probability: precProbUnit } = data.hourly_units;
 
+  const numberOfForecasts = dates.length;
+
+  function createArrayWithLength(length) {
+    return Array.from({ length }, (_, index) => index);
+  }
   return (
     <ul>
-      <li>
-        {dates[0]} {temperatures[0]}
-      </li>
-      <li>
-        {dates[1]} {temperatures[1]}
-      </li>
-      <li>
-        {dates[2]} {temperatures[2]}
-      </li>
+      {createArrayWithLength(numberOfForecasts).map((_, index) => (
+        <li key={index}>
+          {dates[index]} {temperatures[index]} {sunrises[index]}
+          {sunsets[index]} {uv_index[index]}
+        </li>
+      ))}
     </ul>
   );
 }
+
+//   return (
+//     <ul>
+//       <li>
+//         {dates[0]} {temperatures[0]}
+//       </li>
+//       <li>
+//         {dates[1]} {temperatures[1]}
+//       </li>
+//       <li>
+//         {dates[2]} {temperatures[2]}
+//       </li>
+//     </ul>
+//   );
+// }
