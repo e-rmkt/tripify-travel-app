@@ -5,19 +5,13 @@ import { useState } from "react";
 
 export default function TripFormPage() {
   const { mutate } = useSWR("/api/trips");
-
   const [endDateDisabled, setEndDateDisabled] = useState(true);
 
   function handleDisabled(event) {
     setEndDateDisabled(!event.target.value);
   }
 
-  async function handleAddTrip(event) {
-    event.preventDefault();
-
-    const formData = new FormData(event.target);
-    const tripData = Object.fromEntries(formData);
-
+  async function handleAddTrip(tripData) {
     const repTripDataCountry = tripData.country.replace(" ", "");
     const repTripDataCity = tripData.city.replace(" ", "-");
 
