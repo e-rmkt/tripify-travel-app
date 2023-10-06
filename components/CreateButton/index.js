@@ -1,31 +1,16 @@
 import { StyledCreateButton } from "./CreateButton.styled";
 import Modal from "../Modals";
-import { StyledLink } from "../Modals/Modals.styled";
-import { useState } from "react";
 
-export default function CreateButton({ children }) {
-  const [showModal, setShowModal] = useState(false);
-
+export default function CreateButton({
+  children,
+  modalType,
+  modalContent,
+  handleClose,
+}) {
   return (
     <>
-      <StyledCreateButton
-        type="submit"
-        onClick={() => {
-          if (tripDataEndDate < tripDataStartDate) {
-            return;
-          } else {
-            setShowModal(true);
-          }
-        }}
-      >
-        {children}
-      </StyledCreateButton>
-      {showModal && (
-        <Modal onClose={() => setShowModal(false)}>
-          Your trip has been successfully created!
-          <StyledLink href="/">Ok</StyledLink>
-        </Modal>
-      )}
+      <StyledCreateButton type="submit">{children}</StyledCreateButton>
+      {modalType && <Modal handleClose={handleClose}>{modalContent()}</Modal>}
     </>
   );
 }
