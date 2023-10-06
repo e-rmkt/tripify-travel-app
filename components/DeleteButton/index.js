@@ -2,6 +2,10 @@ import DeleteIcon from "@/components/DeleteButton/DeleteIcon.svg";
 import { StyledDeleteButton } from "./DeleteButton.styled";
 import Modal from "../Modals";
 import { useState } from "react";
+import {
+  StyledModalYesButton,
+  StyledModalNoButton,
+} from "../Modals/Modals.styled";
 
 export default function DeleteButton({ onHandleDelete }) {
   const [showModal, setShowModal] = useState(false);
@@ -14,12 +18,15 @@ export default function DeleteButton({ onHandleDelete }) {
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           Are you sure you want to delete this trip?
-          <button type="button" onClick={onHandleDelete}>
+          <StyledModalYesButton type="button" onClick={onHandleDelete}>
             Yes
-          </button>
-          <button type="button" onClick={() => setShowModal(false)}>
+          </StyledModalYesButton>
+          <StyledModalNoButton
+            type="button"
+            onClick={() => setShowModal(false)}
+          >
             No
-          </button>
+          </StyledModalNoButton>
         </Modal>
       )}
     </>
