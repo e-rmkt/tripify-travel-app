@@ -75,12 +75,7 @@ export default function TripForm({
         </StyledLabel>
         <StyledLabel>
           Start date
-          <StyledInput
-            name="startDate"
-            type="date"
-            required
-            onChange={handleDisabled}
-          />
+          <StyledInput name="startDate" type="date" onChange={handleDisabled} />
         </StyledLabel>
         <StyledLabel>
           End date
