@@ -9,15 +9,56 @@ import CancelButton from "@/components/CancelButton";
 import CancelIcon from "@/components/CancelButton/CancelIcon.svg";
 import CreateButton from "@/components/CreateButton";
 import CreateIcon from "@/components/CreateButton/CreateIcon.svg";
+import { useState } from "react";
+import Link from "next/link";
 
-export default function TripForm({
-  handleAddTrip,
-  endDateDisabled,
-  handleDisabled,
-}) {
+const MODAL_TYPES = {
+  SUCCESS: "SUCCESS",
+  DATE_ERROR: "DATE_ERROR",
+};
+
+export default function TripForm({ handleAddTrip }) {
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [modalType, setModalType] = useState(null);
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const tripData = Object.fromEntries(formData);
+    if (endDate < startDate) {
+      setModalType(MODAL_TYPES.DATE_ERROR);
+      return;
+    }
+    setModalType(MODAL_TYPES.SUCCESS);
+    handleAddTrip(tripData);
+  }
+  function handleClose() {
+    setEndDate("");
+    setModalType(null);
+  }
+  function getModalContent() {
+    if (modalType === MODAL_TYPES.DATE_ERROR) {
+      return (
+        <>
+          <p>The end date should not come before the start date.</p>
+          <button onClick={handleClose}>Ok</button>
+        </>
+      );
+    }
+    if (modalType === MODAL_TYPES.SUCCESS) {
+      return (
+        <>
+          <p>Your trip has been successfully created.</p>
+          <Link href="/">Ok</Link>
+        </>
+      );
+    }
+  }
+
   return (
     <>
-      <StyledForm onSubmit={handleAddTrip}>
+      <StyledForm onSubmit={handleSubmit}>
         <StyledLabel>
           Country
           <StyledInput
@@ -47,7 +88,8 @@ export default function TripForm({
             name="startDate"
             type="date"
             required
-            onChange={handleDisabled}
+            value={startDate}
+            onChange={(event) => setStartDate(event.target.value)}
           />
         </StyledLabel>
         <StyledLabel>
@@ -56,10 +98,16 @@ export default function TripForm({
             name="endDate"
             type="date"
             required
-            disabled={endDateDisabled}
+            value={endDate}
+            disabled={!startDate}
+            onChange={(event) => setEndDate(event.target.value)}
           />
         </StyledLabel>
-        <CreateButton>
+        <CreateButton
+          modalType={modalType}
+          handleClose={handleClose}
+          modalContent={getModalContent}
+        >
           <CreateIcon /> Create
         </CreateButton>
       </StyledForm>
