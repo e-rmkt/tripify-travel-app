@@ -71,18 +71,3 @@ export default function WeatherList() {
     </ul>
   );
 }
-
-//   return (
-//     <ul>
-//       <li>
-//         {dates[0]} {temperatures[0]}
-//       </li>
-//       <li>
-//         {dates[1]} {temperatures[1]}
-//       </li>
-//       <li>
-//         {dates[2]} {temperatures[2]}
-//       </li>
-//     </ul>
-//   );
-// }
