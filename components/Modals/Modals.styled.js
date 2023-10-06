@@ -27,6 +27,11 @@ export const StyledModalOverlay = styled.div`
 `;
 
 export const StyledModalBody = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
   padding-top: 10px;
 `;
 
@@ -41,4 +46,24 @@ export const StyledLink = styled(Link)`
   padding-inline: 6px;
   border-width: 2px;
   border-style: solid;
+`;
+
+export const StyledModalYesButton = styled.button`
+  margin-top: 30px;
+  width: 110px;
+  height: 25px;
+  background-color: #448cff;
+  border: 1px solid;
+  color: white;
+  border-radius: 13px;
+`;
+
+export const StyledModalNoButton = styled.button`
+  margin-top: 30px;
+  width: 110px;
+  height: 25px;
+  color: white;
+  background-color: #6d6d6d;
+  border: 1px solid;
+  border-radius: 13px;
 `;
