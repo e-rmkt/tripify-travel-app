@@ -1,12 +1,12 @@
-import { StyledUnorderedList } from "../TripList/TripList.styled";
 import { StyledListItem } from "../Trip/Trip.styled";
+import { StyledUnorderedList } from "../TripList/TripList.styled";
 import useSWR from "swr";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
-export default function WeatherList() {
+export default function WeatherList({ latitude, longitude }) {
   const { data, isLoading } = useSWR(
-    `https://api.open-meteo.com/v1/forecast?latitude=53.5507&longitude=9.993&hourly=precipitation_probability,uv_index&daily=temperature_2m_max,sunrise,sunset,uv_index_max&timezone=GMT&forecast_days=3`,
+    `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=precipitation_probability,uv_index&daily=temperature_2m_max,sunrise,sunset,uv_index_max&timezone=GMT&forecast_days=3`,
     fetcher
   );
 

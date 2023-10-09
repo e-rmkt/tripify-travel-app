@@ -6,12 +6,12 @@ import {
   Wrapper,
 } from "./TripDetails.styled";
 
+import Counter from "../Counter";
+import DeleteButton from "../DeleteButton";
+import EditButton from "../EditButton";
 import Link from "next/link";
 import Location from "../Location";
 import TimePeriod from "../TimePeriod";
-import EditButton from "../EditButton";
-import DeleteButton from "../DeleteButton";
-import Counter from "../Counter";
 import WeatherList from "../WeatherList";
 
 export default function TripDetails({
@@ -23,7 +23,12 @@ export default function TripDetails({
   id,
   startDate,
   endDate,
+  // latitude,
+  // longitude,
 }) {
+  const { latitude_city: latitude, longitude_city: longitude } = location;
+  console.log(latitude, longitude);
+
   return (
     <>
       <Header>
@@ -36,7 +41,7 @@ export default function TripDetails({
         <StyledText>{title}</StyledText>
         <TimePeriod timePeriod={timePeriod} />
         <Counter startDate={startDate} endDate={endDate} />
-        <WeatherList />
+        <WeatherList latitude={latitude} longitude={longitude} />
       </DetailsCard>
       <Wrapper>
         <EditButton id={id} />

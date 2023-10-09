@@ -1,3 +1,4 @@
+import { City, Country } from "country-state-city";
 import {
   StyledContainer,
   StyledForm,
@@ -10,7 +11,6 @@ import CancelButton from "@/components/CancelButton";
 import CancelIcon from "@/components/CancelButton/CancelIcon.svg";
 import CreateButton from "@/components/CreateButton";
 import CreateIcon from "@/components/CreateButton/CreateIcon.svg";
-import { Country, City } from "country-state-city";
 import { useState } from "react";
 
 export default function TripForm({
@@ -32,7 +32,10 @@ export default function TripForm({
     const isoCode = event.target.country.value;
     const { name } = Country.getCountryByCode(isoCode);
     const coordinates = event.target.city.value.split("-");
-    const [latitude, longitude, cityname] = coordinates;
+    const [lat, long, cityname] = coordinates;
+    const latitude = Number(lat).toFixed(4);
+    const longitude = Number(long).toFixed(4);
+    console.log(latitude, longitude);
     handleAddTrip({
       ...data,
       country: {
