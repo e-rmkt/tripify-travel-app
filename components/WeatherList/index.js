@@ -1,6 +1,6 @@
 import { StyledUnorderedList } from "../TripList/TripList.styled";
+import { StyledListItem } from "../Trip/Trip.styled";
 import useSWR from "swr";
-import Weather from "../Weather";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
@@ -16,42 +16,40 @@ export default function WeatherList() {
 
   const {
     temperature_2m_max: temperatures,
-    sunrise: sunrises,
-    sunset: sunsets,
     time: dates,
     uv_index_max: uv_index,
   } = data.daily;
 
-  const {
-    sunrise: sunsrise_time,
-    sunset: sunset_time,
-    temperature_2m_max: temperature_unit,
-  } = data.daily_units;
+  const { temperature_2m_max: temperature_unit } = data.daily_units;
   const initalValue = 0;
 
   const { precipitation_probability } = data.hourly;
-  const precPropToday =
+
+  const precPropToday = Math.round(
     precipitation_probability
       .slice(0, 24)
       .reduce(
         (accumulator, currentValue) => accumulator + currentValue,
         initalValue
-      ) / 24;
+      ) / 24
+  );
 
-  const precPropTomorrow =
+  const precPropTomorrow = Math.round(
     precipitation_probability
       .slice(24, 48)
       .reduce(
         (accumulator, currentValue) => accumulator + currentValue,
         initalValue
-      ) / 24;
-  const precPropDayAfterTomorrow =
+      ) / 24
+  );
+  const precPropDayAfterTomorrow = Math.round(
     precipitation_probability
       .slice(48, 72)
       .reduce(
         (accumulator, currentValue) => accumulator + currentValue,
         initalValue
-      ) / 24;
+      ) / 24
+  );
 
   const { precipitation_probability: precProbUnit } = data.hourly_units;
 
@@ -60,14 +58,23 @@ export default function WeatherList() {
   function createArrayWithLength(length) {
     return Array.from({ length }, (_, index) => index);
   }
+
+  const precProp = [precPropToday, precPropTomorrow, precPropDayAfterTomorrow];
+  console.log(precProp);
+
   return (
-    <ul>
+    <StyledUnorderedList>
       {createArrayWithLength(numberOfForecasts).map((_, index) => (
-        <li key={index}>
-          {dates[index]} {temperatures[index]} {sunrises[index]}
-          {sunsets[index]} {uv_index[index]}
-        </li>
+        <StyledListItem key={index}>
+          {dates[index]}
+          <br /> Temperature: {temperatures[index]}
+          {temperature_unit}
+          <br /> Ø UV-Index: {uv_index[index]}
+          <br />Ø Precipitation probability:
+          {precProp[index]}
+          {precProbUnit}
+        </StyledListItem>
       ))}
-    </ul>
+    </StyledUnorderedList>
   );
 }

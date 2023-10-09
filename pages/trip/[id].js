@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
 import useSWR from "swr";
 import TripDetails from "@/components/TripDetails";
-import WeatherList from "@/components/WeatherList";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
@@ -40,7 +39,6 @@ export default function TripDetailsPage() {
         startDate={startDate}
         endDate={endDate}
       />
-      <WeatherList />
     </>
   );
 }
