@@ -3,6 +3,7 @@ import {
   StyledForm,
   StyledInput,
   StyledLabel,
+  StyledSelect,
 } from "./TripForm.styled";
 
 import CancelButton from "@/components/CancelButton";
@@ -51,17 +52,22 @@ export default function TripForm({
       <StyledForm onSubmit={onSubmit}>
         <StyledLabel>
           Country
-          <select name="country" onChange={handleIsoCode} required>
+          <StyledSelect
+            name="country"
+            onChange={handleIsoCode}
+            required
+            maxMenuHeight={10}
+          >
             {countries.map(({ isoCode, flag, name }) => (
               <option key={isoCode} value={isoCode}>
                 {name} {flag}
               </option>
             ))}
-          </select>
+          </StyledSelect>
         </StyledLabel>
         <StyledLabel>
           City
-          <select name="city" required>
+          <StyledSelect name="city" required>
             {cities
               .filter(({ countryCode }) => countryCode === isoCode)
               .map(({ latitude, longitude, name, stateCode }) => (
@@ -72,7 +78,7 @@ export default function TripForm({
                   {name} - {stateCode}
                 </option>
               ))}
-          </select>
+          </StyledSelect>
         </StyledLabel>
         <StyledLabel>
           Title

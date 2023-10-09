@@ -60,7 +60,6 @@ export default function WeatherList() {
   }
 
   const precProp = [precPropToday, precPropTomorrow, precPropDayAfterTomorrow];
-  console.log(precProp);
 
   return (
     <StyledUnorderedList>
