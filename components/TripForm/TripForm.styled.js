@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Link from "next/link";
 
 export const StyledForm = styled.form`
   display: flex;
@@ -34,4 +35,29 @@ export const StyledContainer = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 13px;
+`;
+
+export const StyledLink = styled(Link)`
+  width: 100px;
+  height: 25px;
+  background-color: #448cff;
+  border: 1px solid;
+  color: white;
+  border-radius: 13px;
+`;
+
+export const StyledWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  gap: 10px;
+`;
+
+export const StyledNoButton = styled.button`
+  width: 100px;
+  height: 25px;
+  color: white;
+  background-color: #6d6d6d;
+  border: 1px solid;
+  border-radius: 13px;
 `;
