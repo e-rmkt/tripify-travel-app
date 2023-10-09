@@ -3,6 +3,7 @@ import {
   StyledForm,
   StyledInput,
   StyledLabel,
+  StyledModalParagraph,
 } from "./TripForm.styled";
 
 import CancelButton from "@/components/CancelButton";
@@ -41,7 +42,9 @@ export default function TripForm({ handleAddTrip }) {
     if (modalType === MODAL_TYPES.DATE_ERROR) {
       return (
         <>
-          <p>The end date should not come before the start date.</p>
+          <StyledModalParagraph>
+            The end date should not come before the start date.
+          </StyledModalParagraph>
           <button onClick={handleClose}>Ok</button>
         </>
       );
@@ -49,7 +52,9 @@ export default function TripForm({ handleAddTrip }) {
     if (modalType === MODAL_TYPES.SUCCESS) {
       return (
         <>
-          <p>Your trip has been successfully created.</p>
+          <StyledModalParagraph>
+            Your trip has been successfully created.
+          </StyledModalParagraph>
           <Link href="/">Ok</Link>
         </>
       );
