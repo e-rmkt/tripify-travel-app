@@ -15,11 +15,18 @@ export default function TripFormPage() {
 
   async function handleAddTrip(tripData) {
     const repTripDataCountry = tripData.country.name.replace(" ", "");
-    const repTripDataCity = tripData.city.replace(" ", "-");
+    const repTripDataCity = tripData.city.cityname.replace(" ", "-");
 
     const newTrip = {
       title: tripData.title,
-      location: [{ country: tripData.country.name, city: tripData.city }],
+      location: [
+        {
+          country: tripData.country.name,
+          city: tripData.city.cityname,
+          latitude_city: tripData.city.latitude,
+          longitude_city: tripData.city.longitude,
+        },
+      ],
       timePeriod: [
         { startDate: tripData.startDate, endDate: tripData.endDate },
       ],
