@@ -35,7 +35,7 @@ export default function TripForm({
     const [lat, long, cityname] = coordinates;
     const latitude = Number(lat).toFixed(4);
     const longitude = Number(long).toFixed(4);
-    console.log(latitude, longitude);
+
     handleAddTrip({
       ...data,
       country: {

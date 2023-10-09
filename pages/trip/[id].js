@@ -24,28 +24,26 @@ export default function TripDetailsPage() {
   }
 
   const { title, location, timePeriod, img } = trips;
-  // const { latitude_city, longitude_city } = location;
-  // console.log(latitude_city, longitude_city);
-  // console.log(location);
-  console.log(trips);
 
   const startDate = timePeriod.map((timePeriod) => `${timePeriod.startDate}`);
   const endDate = timePeriod.map((timePeriod) => `${timePeriod.endDate}`);
 
+  const longitude = location.map((longitude) => `${longitude.longitude_city}`);
+  const latitude = location.map((latitude) => `${latitude.latitude_city}`);
+
   return (
     <>
       <TripDetails
-        // title={title}
-        // location={location}
+        title={title}
+        location={location}
         handleDelete={handleDelete}
-        // img={img}
-        // timePeriod={timePeriod}
+        img={img}
+        timePeriod={timePeriod}
         id={id}
         startDate={startDate}
         endDate={endDate}
-        // latitude={latitude_city}
-        // longitude={longitude_city}
-        {...trips}
+        latitude={latitude}
+        longitude={longitude}
       />
     </>
   );

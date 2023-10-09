@@ -23,12 +23,9 @@ export default function TripDetails({
   id,
   startDate,
   endDate,
-  // latitude,
-  // longitude,
+  latitude,
+  longitude,
 }) {
-  const { latitude_city: latitude, longitude_city: longitude } = location;
-  console.log(latitude, longitude);
-
   return (
     <>
       <Header>
