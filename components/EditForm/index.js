@@ -3,12 +3,22 @@ import {
   StyledForm,
   StyledInput,
   StyledLabel,
+  StyledModalParagraph,
+  StyledLink,
+  StyledWrapper,
+  StyledNoButton,
 } from "../TripForm/TripForm.styled";
 
 import CancelButton from "@/components/CancelButton";
 import CancelIcon from "@/components/CancelButton/CancelIcon.svg";
-import CreateButton from "@/components/CreateButton";
+import SaveButton from "@/components/SaveButton";
 import CreateIcon from "@/components/CreateButton/CreateIcon.svg";
+import { useState } from "react";
+
+const MODAL_TYPES = {
+  SUCCESS: "SUCCESS",
+  DATE_ERROR: "DATE_ERROR",
+};
 
 export default function EditForm({
   country,
@@ -17,13 +27,59 @@ export default function EditForm({
   startDate,
   endDate,
   handleEditTrip,
-  toggleDisabled,
-  endDateDisabled,
 }) {
+  const [startDateValue, setStartDateValue] = useState("");
+  const [endDateValue, setEndDateValue] = useState("");
+  const [modalType, setModalType] = useState(null);
+
+  function handleEditSubmit(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const tripData = Object.fromEntries(formData);
+    const newEndDate = event.target.endDate.value;
+    const newStartDate = event.target.startDate.value;
+
+    if (newEndDate < newStartDate) {
+      setModalType(MODAL_TYPES.DATE_ERROR);
+
+      return;
+    }
+    setModalType(MODAL_TYPES.SUCCESS);
+    handleEditTrip(tripData);
+  }
+  function handleClose() {
+    setEndDateValue("");
+    setModalType(null);
+  }
+  function getModalContent() {
+    if (modalType === MODAL_TYPES.DATE_ERROR) {
+      return (
+        <>
+          <StyledModalParagraph>
+            The end date should not come before the start date.
+          </StyledModalParagraph>
+          <StyledNoButton onClick={handleClose}>Ok</StyledNoButton>
+        </>
+      );
+    }
+    if (modalType === MODAL_TYPES.SUCCESS) {
+      return (
+        <>
+          <StyledModalParagraph>
+            Your trip has been successfully edited.
+          </StyledModalParagraph>
+          <StyledWrapper>
+            <StyledLink href="/">Ok</StyledLink>
+          </StyledWrapper>
+        </>
+      );
+    }
+  }
+
   return (
     <>
       <h1>Edit Trip</h1>
-      <StyledForm onSubmit={handleEditTrip}>
+      <StyledForm onSubmit={handleEditSubmit}>
         <StyledLabel>
           Country
           <StyledInput
@@ -53,7 +109,7 @@ export default function EditForm({
             type="date"
             defaultValue={startDate}
             required
-            onChange={toggleDisabled}
+            onChange={(event) => setStartDateValue(event.target.value)}
           />
         </StyledLabel>
         <StyledLabel>
@@ -62,12 +118,17 @@ export default function EditForm({
             name="endDate"
             type="date"
             defaultValue={endDate}
-            disabled={endDateDisabled}
+            disabled={!startDate}
+            onChange={(event) => setEndDateValue(event.target.value)}
           />
         </StyledLabel>
-        <CreateButton>
+        <SaveButton
+          modalType={modalType}
+          handleClose={handleClose}
+          modalContent={getModalContent}
+        >
           <CreateIcon /> Save
-        </CreateButton>
+        </SaveButton>
       </StyledForm>
       <StyledContainer>
         <CancelButton>
