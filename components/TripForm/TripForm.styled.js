@@ -21,7 +21,7 @@ export const StyledLabel = styled.label`
 export const StyledInput = styled.input`
   height: 30px;
   border-radius: 50px;
-  border: 1px solid rgba(0, 130, 255, 0.15);
+  border: 1px solid #0082ff26;
   padding: 0 15px;
   font-size: 14px;
   font-family: sans-serif;
@@ -42,7 +42,7 @@ export const StyledLink = styled(Link)`
   height: 25px;
   background-color: #448cff;
   border: 1px solid;
-  color: white;
+  color: #ffffff;
   border-radius: 13px;
 `;
 
@@ -56,7 +56,7 @@ export const StyledWrapper = styled.div`
 export const StyledNoButton = styled.button`
   width: 100px;
   height: 25px;
-  color: white;
+  color: #ffffff;
   background-color: #6d6d6d;
   border: 1px solid;
   border-radius: 13px;

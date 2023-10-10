@@ -7,13 +7,13 @@ export const StyledModal = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: #00000080;
 `;
 export const StyledModalContent = styled.div`
   display: flex;
-  background-color: white;
+  background-color: #ffffff;
   border-radius: 8px;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  box-shadow: #00000059 0px 5px 15px;
   width: 300px;
   padding: 16px;
   position: relative;
@@ -61,13 +61,13 @@ export const StyledModalYesButton = styled.button`
   height: 25px;
   background-color: #448cff;
   border: 1px solid;
-  color: white;
+  color: #ffffff;
   border-radius: 13px;
 `;
 export const StyledModalNoButton = styled.button`
   width: 100px;
   height: 25px;
-  color: white;
+  color: #ffffff;
   background-color: #6d6d6d;
   border: 1px solid;
   border-radius: 13px;
@@ -81,7 +81,7 @@ export const StyledModalOkButton = styled.button`
   margin-left: 92px;
   width: 100px;
   height: 25px;
-  color: white;
+  color: #ffffff;
   background-color: #6d6d6d;
   border: 1px solid;
   border-radius: 13px;

@@ -13,8 +13,6 @@ export const StyledCancelButton = styled.button`
   color: #ff003d;
   font-size: 16px;
   font-weight: 600;
-  text-decoration: none;
-  text-wrap: nowrap;
   &:visited {
     color: #ff003d;
   }
