@@ -1,3 +1,4 @@
+import { City, Country } from "country-state-city";
 import {
   StyledContainer,
   StyledForm,
@@ -10,7 +11,6 @@ import CancelButton from "@/components/CancelButton";
 import CancelIcon from "@/components/CancelButton/CancelIcon.svg";
 import CreateButton from "@/components/CreateButton";
 import CreateIcon from "@/components/CreateButton/CreateIcon.svg";
-import { City, Country } from "country-state-city";
 import { useState } from "react";
 
 export default function EditForm({
@@ -66,7 +66,7 @@ export default function EditForm({
         <StyledLabel>
           Country
           <StyledSelect name="country" onChange={handleIsoCode} required>
-            <option selected>
+            <option selected value={defaultIsoCode}>
               {country} {defaultFlag}
             </option>
             {countries.map(({ isoCode, flag, name }) => (
