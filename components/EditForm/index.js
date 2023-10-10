@@ -3,12 +3,15 @@ import {
   StyledForm,
   StyledInput,
   StyledLabel,
+  StyledSelect,
 } from "../TripForm/TripForm.styled";
 
 import CancelButton from "@/components/CancelButton";
 import CancelIcon from "@/components/CancelButton/CancelIcon.svg";
 import CreateButton from "@/components/CreateButton";
 import CreateIcon from "@/components/CreateButton/CreateIcon.svg";
+import { City, Country } from "country-state-city";
+import { useState } from "react";
 
 export default function EditForm({
   country,
@@ -20,22 +23,74 @@ export default function EditForm({
   toggleDisabled,
   endDateDisabled,
 }) {
+  const countries = Country.getAllCountries();
+  const defaultIsoCode = countries.filter(({ name }) => name === country)[0]
+    .isoCode;
+  const defaultFlag = countries.filter(({ name }) => name === country)[0].flag;
+  const [isoCode, setIsoCode] = useState(defaultIsoCode);
+  const cities = City.getCitiesOfCountry(isoCode);
+  const [defaultCity, setDefaultCity] = useState(city);
+
+  function handleIsoCode(event) {
+    setIsoCode(event.target.value);
+    setDefaultCity();
+  }
+
+  function onSubmit(event) {
+    event.preventDefault();
+    const data = Object.fromEntries(new FormData(event.target));
+    const isoCode = event.target.country.value;
+    const { name } = Country.getCountryByCode(isoCode);
+    const coordinates = event.target.city.value.split("-");
+    const [lat, long, cityname] = coordinates;
+    const latitude = Number(lat).toFixed(4);
+    const longitude = Number(long).toFixed(4);
+
+    handleEditTrip({
+      ...data,
+      country: {
+        name,
+        isoCode,
+      },
+      city: {
+        cityname,
+        longitude,
+        latitude,
+      },
+    });
+  }
   return (
     <>
       <h1>Edit Trip</h1>
-      <StyledForm onSubmit={handleEditTrip}>
+      <StyledForm onSubmit={onSubmit}>
         <StyledLabel>
           Country
-          <StyledInput
-            name="country"
-            defaultValue={country}
-            minLength={3}
-            required
-          />
+          <StyledSelect name="country" onChange={handleIsoCode} required>
+            <option selected>
+              {country} {defaultFlag}
+            </option>
+            {countries.map(({ isoCode, flag, name }) => (
+              <option key={isoCode} value={isoCode}>
+                {name} {flag}
+              </option>
+            ))}
+          </StyledSelect>
         </StyledLabel>
         <StyledLabel>
           City
-          <StyledInput name="city" defaultValue={city} />
+          <StyledSelect name="city" required>
+            <option selected>{defaultCity}</option>
+            {cities
+              .filter(({ countryCode }) => countryCode === isoCode)
+              .map(({ latitude, longitude, name, stateCode }) => (
+                <option
+                  key={`${latitude}-${longitude}-${name}`}
+                  value={`${latitude}-${longitude}-${name}`}
+                >
+                  {name} - {stateCode}
+                </option>
+              ))}
+          </StyledSelect>
         </StyledLabel>
         <StyledLabel>
           Title

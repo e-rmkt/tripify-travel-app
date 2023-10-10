@@ -21,7 +21,7 @@ export default function EditFormPage() {
     return <h2>is Loading...</h2>;
   }
 
-  const { title, location, timePeriod, img } = trip;
+  const { title, location, timePeriod } = trip;
   const { country, city } = location[0];
   const { startDate, endDate } = timePeriod[0];
 
