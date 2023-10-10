@@ -19,7 +19,7 @@ export default function TripForm({
   handleDisabled,
 }) {
   const countries = Country.getAllCountries();
-  const [isoCode, setIsoCode] = useState(countries[0].isoCode);
+  const [isoCode, setIsoCode] = useState(countries.isoCode);
   const cities = City.getCitiesOfCountry(isoCode);
 
   function handleIsoCode(event) {
@@ -61,6 +61,9 @@ export default function TripForm({
             required
             maxMenuHeight={10}
           >
+            <option selected hidden disabled>
+              Please select a country
+            </option>
             {countries.map(({ isoCode, flag, name }) => (
               <option key={isoCode} value={isoCode}>
                 {name} {flag}
@@ -70,7 +73,11 @@ export default function TripForm({
         </StyledLabel>
         <StyledLabel>
           City
-          <StyledSelect name="city" required>
+          <StyledSelect name="city">
+            <option selected hidden disabled>
+              Please select a city
+            </option>
+
             {cities
               .filter(({ countryCode }) => countryCode === isoCode)
               .map(({ latitude, longitude, name, stateCode }) => (
