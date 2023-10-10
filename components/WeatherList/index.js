@@ -1,6 +1,9 @@
-import { StyledButton } from "./WeatherList.styled";
-import { StyledListItem } from "../Trip/Trip.styled";
+import { StyledButton, StyledListItem, Wrapper } from "./WeatherList.styled";
+
+import RainIcon from "@/components/WeatherList/RainIcon.svg";
 import { StyledUnorderedList } from "../TripList/TripList.styled";
+import TempIcon from "@/components/WeatherList/TempIcon.svg";
+import UVIcon from "@/components/WeatherList/UVIcon.svg";
 import WeatherIcon from "@/components/WeatherList/WeatherIcon.svg";
 import useSWR from "swr";
 import { useState } from "react";
@@ -72,19 +75,25 @@ export default function WeatherList({ latitude, longitude }) {
         <StyledUnorderedList>
           {dates.map((date, index) => (
             <StyledListItem key={date}>
-              <h2>{dates[index]}</h2>
-              <br />
-              <h3>
-                Temperature: {temperatures[index]}
-                {temperature_unit}
-              </h3>
-              <br />
-              <h3>Ø UV-Index: {uv_index[index]}</h3>
-              <br />
-              <h3>
-                Ø Precipitation probability: {precProp[index]}
-                {precProbUnit}
-              </h3>
+              <h3>{dates[index]}</h3>
+              <Wrapper>
+                <TempIcon />
+                <h3>
+                  {temperatures[index]}
+                  {temperature_unit}
+                </h3>
+              </Wrapper>
+              <Wrapper>
+                <UVIcon />
+                <h3>{uv_index[index]}</h3>
+              </Wrapper>
+              <Wrapper>
+                <RainIcon />
+                <h3>
+                  {precProp[index]}
+                  {precProbUnit}
+                </h3>
+              </Wrapper>
             </StyledListItem>
           ))}
         </StyledUnorderedList>

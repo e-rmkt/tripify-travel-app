@@ -1,5 +1,16 @@
 import styled from "styled-components";
 
+export const StyledListItem = styled.li`
+  list-style-type: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(68, 140, 255, 0.15);
+`;
+
 export const StyledButton = styled.button`
   background-color: #448cff;
   display: flex;
@@ -16,4 +27,10 @@ export const StyledButton = styled.button`
   font-size: 15px;
   font-weight: 500;
   text-wrap: nowrap;
+`;
+
+export const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
