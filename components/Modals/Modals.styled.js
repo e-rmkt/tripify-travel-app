@@ -19,12 +19,34 @@ export const StyledModalContent = styled.div`
   position: relative;
 `;
 export const StyledLink = styled(Link)`
-  width: 100px;
-  height: 25px;
+  display: flex;
+  font-size: 14px;
+  justify-content: center;
+  align-items: center;
+  width: 98px;
+  height: 23px;
+  padding: 1px 6px 1px 6px;
   background-color: #448cff;
-  border: 1px solid;
-  color: white;
   border-radius: 13px;
+  && {
+    color: #ffffff;
+  }
+`;
+
+export const StyledOkLink = styled(Link)`
+  display: flex;
+  font-size: 14px;
+  justify-content: center;
+  align-items: center;
+  margin-left: 92px;
+  width: 88px;
+  height: 23px;
+  background-color: #6d6d6d;
+  border: 1px solid;
+  border-radius: 13px;
+  && {
+    color: #ffffff;
+  }
 `;
 
 export const StyledWrapper = styled.div`
@@ -50,6 +72,17 @@ export const StyledModalNoButton = styled.button`
   border: 1px solid;
   border-radius: 13px;
 `;
-export const StyledModalParagraph = styled.p`
+export const StyledModalText = styled.section`
   font-size: 16px;
+  margin-bottom: 31px;
+`;
+
+export const StyledModalOkButton = styled.button`
+  margin-left: 92px;
+  width: 100px;
+  height: 25px;
+  color: white;
+  background-color: #6d6d6d;
+  border: 1px solid;
+  border-radius: 13px;
 `;
