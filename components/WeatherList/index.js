@@ -1,10 +1,17 @@
+import { StyledButton } from "./WeatherList.styled";
 import { StyledListItem } from "../Trip/Trip.styled";
 import { StyledUnorderedList } from "../TripList/TripList.styled";
+import WeatherIcon from "@/components/WeatherList/WeatherIcon.svg";
 import useSWR from "swr";
+import { useState } from "react";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 export default function WeatherList({ latitude, longitude }) {
+  const [isHidden, setIsHidden] = useState(true);
+  function toggleHidden() {
+    setIsHidden(!isHidden);
+  }
   const { data, isLoading } = useSWR(
     `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=precipitation_probability,uv_index&daily=temperature_2m_max,sunrise,sunset,uv_index_max&timezone=GMT&forecast_days=10`,
     fetcher
@@ -56,18 +63,32 @@ export default function WeatherList({ latitude, longitude }) {
   const precProp = [precPropToday, precPropTomorrow, precPropDayAfterTomorrow];
 
   return (
-    <StyledUnorderedList>
-      {dates.map((date, index) => (
-        <StyledListItem key={date}>
-          {dates[index]}
-          <br /> Temperature: {temperatures[index]}
-          {temperature_unit}
-          <br /> Ø UV-Index: {uv_index[index]}
-          <br />Ø Precipitation probability:
-          {precProp[index]}
-          {precProbUnit}
-        </StyledListItem>
-      ))}
-    </StyledUnorderedList>
+    <>
+      <StyledButton onClick={toggleHidden}>
+        <WeatherIcon />
+        {isHidden ? "Show Weather Forecast" : "Hide Weather Forecast"}
+      </StyledButton>
+      {!isHidden ? (
+        <StyledUnorderedList>
+          {dates.map((date, index) => (
+            <StyledListItem key={date}>
+              <h2>{dates[index]}</h2>
+              <br />
+              <h3>
+                Temperature: {temperatures[index]}
+                {temperature_unit}
+              </h3>
+              <br />
+              <h3>Ø UV-Index: {uv_index[index]}</h3>
+              <br />
+              <h3>
+                Ø Precipitation probability: {precProp[index]}
+                {precProbUnit}
+              </h3>
+            </StyledListItem>
+          ))}
+        </StyledUnorderedList>
+      ) : null}
+    </>
   );
 }
