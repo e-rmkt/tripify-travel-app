@@ -6,7 +6,7 @@ const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 export default function WeatherList({ latitude, longitude }) {
   const { data, isLoading } = useSWR(
-    `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=precipitation_probability,uv_index&daily=temperature_2m_max,sunrise,sunset,uv_index_max&timezone=GMT&forecast_days=3`,
+    `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=precipitation_probability,uv_index&daily=temperature_2m_max,sunrise,sunset,uv_index_max&timezone=GMT&forecast_days=10`,
     fetcher
   );
 
@@ -53,18 +53,12 @@ export default function WeatherList({ latitude, longitude }) {
 
   const { precipitation_probability: precProbUnit } = data.hourly_units;
 
-  const numberOfForecasts = dates.length;
-
-  function createArrayWithLength(length) {
-    return Array.from({ length }, (_, index) => index);
-  }
-
   const precProp = [precPropToday, precPropTomorrow, precPropDayAfterTomorrow];
 
   return (
     <StyledUnorderedList>
-      {createArrayWithLength(numberOfForecasts).map((_, index) => (
-        <StyledListItem key={index}>
+      {dates.map((date, index) => (
+        <StyledListItem key={date}>
           {dates[index]}
           <br /> Temperature: {temperatures[index]}
           {temperature_unit}
