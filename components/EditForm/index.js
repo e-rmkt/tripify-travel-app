@@ -3,11 +3,13 @@ import {
   StyledForm,
   StyledInput,
   StyledLabel,
-  StyledModalParagraph,
-  StyledLink,
-  StyledWrapper,
-  StyledNoButton,
 } from "../TripForm/TripForm.styled";
+
+import {
+  StyledModalText,
+  StyledModalOkButton,
+  StyledOkLink,
+} from "../Modals/Modals.styled";
 
 import CancelButton from "@/components/CancelButton";
 import CancelIcon from "@/components/CancelButton/CancelIcon.svg";
@@ -55,22 +57,21 @@ export default function EditForm({
     if (modalType === MODAL_TYPES.DATE_ERROR) {
       return (
         <>
-          <StyledModalParagraph>
+          <StyledModalText>
             The end date should not come before the start date.
-          </StyledModalParagraph>
-          <StyledNoButton onClick={handleClose}>Ok</StyledNoButton>
+          </StyledModalText>
+
+          <StyledModalOkButton onClick={handleClose}>Ok</StyledModalOkButton>
         </>
       );
     }
     if (modalType === MODAL_TYPES.SUCCESS) {
       return (
         <>
-          <StyledModalParagraph>
+          <StyledModalText>
             Your trip has been successfully edited.
-          </StyledModalParagraph>
-          <StyledWrapper>
-            <StyledLink href="/">Ok</StyledLink>
-          </StyledWrapper>
+          </StyledModalText>
+          <StyledOkLink href="/">Ok</StyledOkLink>
         </>
       );
     }

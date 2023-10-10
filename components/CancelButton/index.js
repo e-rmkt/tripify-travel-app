@@ -1,7 +1,11 @@
 import { StyledCancelButton } from "./CancelButton.styled";
 import Modal from "../Modals";
 import { useState } from "react";
-import { StyledLink, StyledModalNoButton } from "../Modals/Modals.styled";
+import {
+  StyledLink,
+  StyledModalNoButton,
+  StyledWrapper,
+} from "../Modals/Modals.styled";
 
 export default function CancelButton({ children }) {
   const [showModal, setShowModal] = useState(false);
@@ -14,13 +18,15 @@ export default function CancelButton({ children }) {
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           Are you sure you want to discard your changes?
-          <StyledLink href="javascript:history.back()">Yes</StyledLink>
-          <StyledModalNoButton
-            type="button"
-            onClick={() => setShowModal(false)}
-          >
-            No
-          </StyledModalNoButton>
+          <StyledWrapper>
+            <StyledLink href="javascript:history.back()">Yes</StyledLink>
+            <StyledModalNoButton
+              type="button"
+              onClick={() => setShowModal(false)}
+            >
+              No
+            </StyledModalNoButton>
+          </StyledWrapper>
         </Modal>
       )}
     </>

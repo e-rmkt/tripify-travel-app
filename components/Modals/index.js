@@ -1,7 +1,7 @@
 import React from "react";
 import {
   StyledModal,
-  StyledModalParagraph,
+  StyledModalText,
   StyledModalContent,
 } from "./Modals.styled";
 
@@ -9,7 +9,7 @@ export default function Modal({ children }) {
   return (
     <StyledModal>
       <StyledModalContent>
-        <StyledModalParagraph>{children}</StyledModalParagraph>
+        <StyledModalText>{children}</StyledModalText>
       </StyledModalContent>
     </StyledModal>
   );

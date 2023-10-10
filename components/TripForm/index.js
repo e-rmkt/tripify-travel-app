@@ -3,15 +3,19 @@ import {
   StyledForm,
   StyledInput,
   StyledLabel,
-  StyledModalParagraph,
 } from "./TripForm.styled";
+
+import {
+  StyledModalText,
+  StyledOkLink,
+  StyledModalOkButton,
+} from "../Modals/Modals.styled";
 
 import CancelButton from "@/components/CancelButton";
 import CancelIcon from "@/components/CancelButton/CancelIcon.svg";
 import CreateButton from "@/components/CreateButton";
 import CreateIcon from "@/components/CreateButton/CreateIcon.svg";
 import { useState } from "react";
-import Link from "next/link";
 
 const MODAL_TYPES = {
   SUCCESS: "SUCCESS",
@@ -42,20 +46,20 @@ export default function TripForm({ handleAddTrip }) {
     if (modalType === MODAL_TYPES.DATE_ERROR) {
       return (
         <>
-          <StyledModalParagraph>
+          <StyledModalText>
             The end date should not come before the start date.
-          </StyledModalParagraph>
-          <button onClick={handleClose}>Ok</button>
+          </StyledModalText>
+          <StyledModalOkButton onClick={handleClose}>Ok</StyledModalOkButton>
         </>
       );
     }
     if (modalType === MODAL_TYPES.SUCCESS) {
       return (
         <>
-          <StyledModalParagraph>
+          <StyledModalText>
             Your trip has been successfully created.
-          </StyledModalParagraph>
-          <Link href="/">Ok</Link>
+          </StyledModalText>
+          <StyledOkLink href="/">Ok</StyledOkLink>
         </>
       );
     }
