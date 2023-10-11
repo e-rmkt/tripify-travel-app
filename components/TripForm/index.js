@@ -73,7 +73,7 @@ export default function TripForm({
         </StyledLabel>
         <StyledLabel>
           City
-          <StyledSelect name="city">
+          <StyledSelect name="city" required>
             <option selected hidden disabled>
               Please select a city
             </option>

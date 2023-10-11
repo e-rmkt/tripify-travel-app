@@ -29,18 +29,20 @@ export default function EditFormPage() {
     setEndDateDisabled(!event.target.value);
   }
 
-  async function handleEditTrip(event) {
-    event.preventDefault();
-
-    const formData = new FormData(event.target);
-    const tripData = Object.fromEntries(formData);
-
-    const repTripDataCountry = tripData.country.replace(" ", "");
-    const repTripDataCity = tripData.city.replace(" ", "-");
+  async function handleEditTrip(tripData) {
+    const repTripDataCountry = tripData.country.name.replace(" ", "");
+    const repTripDataCity = tripData.city.cityname.replace(" ", "-");
 
     const editedTrip = {
       title: tripData.title,
-      location: [{ country: tripData.country, city: tripData.city }],
+      location: [
+        {
+          country: tripData.country.name,
+          city: tripData.city.cityname,
+          latitude_city: tripData.city.latitude,
+          longitude_city: tripData.city.longitude,
+        },
+      ],
       timePeriod: [
         { startDate: tripData.startDate, endDate: tripData.endDate },
       ],
