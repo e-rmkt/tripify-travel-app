@@ -2,7 +2,7 @@ import Link from "next/link";
 import styled from "styled-components";
 
 export const StyledLink = styled(Link)`
-  border: 0.125rem solid #ffa573;
+  border: 2px solid #ffa573;
   background-color: #ffa573;
   display: flex;
   justify-content: center;
@@ -10,7 +10,7 @@ export const StyledLink = styled(Link)`
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  font-size: 3.125rem;
+  font-size: 50px;
   text-decoration: none;
 `;
 

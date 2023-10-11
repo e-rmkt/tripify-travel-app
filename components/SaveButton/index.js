@@ -1,7 +1,7 @@
-import { StyledCreateButton } from "./CreateButton.styled";
+import { StyledSaveButton } from "./SaveButton.styled";
 import Modal from "../Modals";
 
-export default function CreateButton({
+export default function SaveButton({
   children,
   modalType,
   modalContent,
@@ -9,7 +9,7 @@ export default function CreateButton({
 }) {
   return (
     <>
-      <StyledCreateButton type="submit">{children}</StyledCreateButton>
+      <StyledSaveButton type="submit">{children}</StyledSaveButton>
       {modalType && <Modal handleClose={handleClose}>{modalContent()}</Modal>}
     </>
   );
