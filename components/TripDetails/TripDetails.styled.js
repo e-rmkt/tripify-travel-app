@@ -28,4 +28,12 @@ export const StyledText = styled.p`
 
 export const StyledImage = styled(Image)`
   border-radius: 13px;
+  object-fit: cover;
+`;
+
+export const ImageContainer = styled.div`
+  position: relative;
+  overflow: hidden;
+  height: 300px;
+  width: 335px;
 `;

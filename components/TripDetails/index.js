@@ -1,17 +1,18 @@
 import {
   DetailsCard,
   Header,
+  ImageContainer,
   StyledImage,
   StyledText,
   Wrapper,
 } from "./TripDetails.styled";
 
+import Counter from "../Counter";
+import DeleteButton from "../DeleteButton";
+import EditButton from "../EditButton";
 import Link from "next/link";
 import Location from "../Location";
 import TimePeriod from "../TimePeriod";
-import EditButton from "../EditButton";
-import DeleteButton from "../DeleteButton";
-import Counter from "../Counter";
 
 export default function TripDetails({
   title,
@@ -29,7 +30,9 @@ export default function TripDetails({
         <h1>Your Trip</h1>
         <Link href="/"> ← back </Link>
       </Header>
-      <StyledImage src={img} width={335} height={300} alt="Dummy Pic" />
+      <ImageContainer>
+        <StyledImage src={img} fill={true} alt="Dummy Pic" />
+      </ImageContainer>
       <DetailsCard>
         <Location location={location} />
         <StyledText>{title}</StyledText>
