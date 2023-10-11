@@ -1,6 +1,6 @@
-import { styled } from "styled-components";
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
+import { styled } from "styled-components";
 
 export const StyledListItem = styled.li`
   list-style-type: none;
@@ -24,10 +24,18 @@ export const StyledLink = styled(Link)`
 
 export const StyledImage = styled(Image)`
   border-radius: 10px;
+  object-fit: cover;
 `;
 
 export const StyledText = styled.p`
   font-size: 14px;
   font-weight: 400;
   margin: 0;
+`;
+
+export const ImageContainer = styled.div`
+  position: relative;
+  overflow: hidden;
+  height: 108px;
+  width: 120px;
 `;
