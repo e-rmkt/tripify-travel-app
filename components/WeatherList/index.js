@@ -61,9 +61,22 @@ export default function WeatherList({ latitude, longitude }) {
       ) / 24
   );
 
+  function precPropTest() {
+    const precPropToday = Math.round(
+      precipitation_probability
+        .slice(0, 24)
+        .reduce(
+          (accumulator, currentValue) => accumulator + currentValue,
+          initalValue
+        ) / 24
+    );
+    precipitation_probability.splice(0, 24);
+    return precPropToday;
+  }
+
   const { precipitation_probability: precProbUnit } = data.hourly_units;
 
-  const precProp = [precPropToday, precPropTomorrow, precPropDayAfterTomorrow];
+  // const precProp = [precPropToday, precPropTomorrow, precPropDayAfterTomorrow];
 
   return (
     <>
@@ -90,7 +103,7 @@ export default function WeatherList({ latitude, longitude }) {
               <Wrapper>
                 <RainIcon />
                 <h3>
-                  {precProp[index]}
+                  {precPropToday}
                   {precProbUnit}
                 </h3>
               </Wrapper>
