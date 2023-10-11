@@ -31,7 +31,7 @@ export default function TripForm({
     const data = Object.fromEntries(new FormData(event.target));
     const isoCode = event.target.country.value;
     const { name } = Country.getCountryByCode(isoCode);
-    const coordinates = event.target.city.value.split("-");
+    const coordinates = event.target.city.value.split("_");
     const [lat, long, cityname] = coordinates;
     const latitude = Number(lat).toFixed(4);
     const longitude = Number(long).toFixed(4);
@@ -83,7 +83,7 @@ export default function TripForm({
               .map(({ latitude, longitude, name, stateCode }) => (
                 <option
                   key={`${latitude}-${longitude}-${name}`}
-                  value={`${latitude}-${longitude}-${name}`}
+                  value={`${latitude}_${longitude}_${name}`}
                 >
                   {name} - {stateCode}
                 </option>
