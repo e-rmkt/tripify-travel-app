@@ -31,52 +31,28 @@ export default function WeatherList({ latitude, longitude }) {
   } = data.daily;
 
   const { temperature_2m_max: temperature_unit } = data.daily_units;
-  const initalValue = 0;
 
   const { precipitation_probability } = data.hourly;
 
-  const precPropToday = Math.round(
-    precipitation_probability
-      .slice(0, 24)
-      .reduce(
-        (accumulator, currentValue) => accumulator + currentValue,
-        initalValue
-      ) / 24
-  );
-
-  const precPropTomorrow = Math.round(
-    precipitation_probability
-      .slice(24, 48)
-      .reduce(
-        (accumulator, currentValue) => accumulator + currentValue,
-        initalValue
-      ) / 24
-  );
-  const precPropDayAfterTomorrow = Math.round(
-    precipitation_probability
-      .slice(48, 72)
-      .reduce(
-        (accumulator, currentValue) => accumulator + currentValue,
-        initalValue
-      ) / 24
-  );
-
-  function precPropTest() {
-    const precPropToday = Math.round(
-      precipitation_probability
-        .slice(0, 24)
-        .reduce(
-          (accumulator, currentValue) => accumulator + currentValue,
-          initalValue
-        ) / 24
-    );
-    precipitation_probability.splice(0, 24);
-    return precPropToday;
-  }
-
   const { precipitation_probability: precProbUnit } = data.hourly_units;
 
-  // const precProp = [precPropToday, precPropTomorrow, precPropDayAfterTomorrow];
+  const dailyAverages = [];
+
+  precipitation_probability.forEach((value, index) => {
+    const dayIndex = Math.floor(index / 24);
+    if (!dailyAverages[dayIndex]) {
+      dailyAverages[dayIndex] = [];
+    }
+    dailyAverages[dayIndex].push(value);
+  });
+
+  const calculatedAverages = dailyAverages.map((dayData) => {
+    const sum = dayData.reduce(
+      (accumulator, currentValue) => accumulator + currentValue,
+      0
+    );
+    return Math.round(sum / dayData.length);
+  });
 
   return (
     <>
@@ -103,7 +79,7 @@ export default function WeatherList({ latitude, longitude }) {
               <Wrapper>
                 <RainIcon />
                 <h3>
-                  {precPropToday}
+                  {calculatedAverages[index]}
                   {precProbUnit}
                 </h3>
               </Wrapper>
