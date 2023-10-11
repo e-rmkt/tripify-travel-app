@@ -29,11 +29,15 @@ export default function EditForm({
   const defaultFlag = countries.filter(({ name }) => name === country)[0].flag;
   const [isoCode, setIsoCode] = useState(defaultIsoCode);
   const cities = City.getCitiesOfCountry(isoCode);
-  const [defaultCity, setDefaultCity] = useState(city);
+  const [selectedCity, setSelectedCity] = useState(city);
 
   function handleIsoCode(event) {
     setIsoCode(event.target.value);
     setDefaultCity();
+  }
+
+  function handleCity(event) {
+    setSelectedCity(event.target.value);
   }
 
   function onSubmit(event) {
@@ -41,10 +45,8 @@ export default function EditForm({
     const data = Object.fromEntries(new FormData(event.target));
     const isoCode = event.target.country.value;
     const { name } = Country.getCountryByCode(isoCode);
-    const coordinates = event.target.city.value.split("_");
-    const [lat, long, cityname] = coordinates;
-    const latitude = Number(lat).toFixed(4);
-    const longitude = Number(long).toFixed(4);
+
+    const chosenCity = cities.find((city) => city.name === selectedCity);
 
     handleEditTrip({
       ...data,
@@ -53,9 +55,9 @@ export default function EditForm({
         isoCode,
       },
       city: {
-        cityname,
-        longitude,
-        latitude,
+        cityname: chosenCity.name,
+        longitude: Number(chosenCity.longitude).toFixed(4),
+        latitude: Number(chosenCity.latitude).toFixed(4),
       },
     });
   }
@@ -78,15 +80,14 @@ export default function EditForm({
         </StyledLabel>
         <StyledLabel>
           City
-          <StyledSelect name="city" required>
-            <option selected>{defaultCity}</option>
+          <StyledSelect name="city" onChange={handleCity} required>
+            <option selected value={selectedCity}>
+              {selectedCity}
+            </option>
             {cities
               .filter(({ countryCode }) => countryCode === isoCode)
               .map(({ latitude, longitude, name, stateCode }) => (
-                <option
-                  key={`${latitude}-${longitude}-${name}`}
-                  value={`${latitude}_${longitude}_${name}`}
-                >
+                <option key={`${latitude}-${longitude}-${name}`} value={name}>
                   {name} - {stateCode}
                 </option>
               ))}
