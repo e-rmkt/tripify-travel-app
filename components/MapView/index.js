@@ -4,6 +4,7 @@ import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import useLeafletConfig from "@/hooks/useLeafletConfig";
 import "leaflet/dist/leaflet.css";
 import useSWR from "swr";
+import L from "leaflet";
 
 const StyledMap = styled.div`
   width: 100%;
@@ -33,8 +34,9 @@ export default function DynamicMap() {
     <StyledMap>
       <MapContainer {...MAP_CONFIG}>
         <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution='&copy; <a href="https://carto.com/">carto.com</a> contributors'
+          url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png"
+          detectRetina={L.Browser.retina ? true : false}
         />
         <Markers
           places={[
