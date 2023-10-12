@@ -6,7 +6,7 @@ export default function WorldMap() {
   return (
     <main>
       <h1>World Map</h1>
-      <div style={{ height: "400px" }}>
+      <div style={{ height: "100vh" }}>
         <MapView />
       </div>
     </main>
