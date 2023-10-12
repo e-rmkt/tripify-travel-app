@@ -1,15 +1,12 @@
 import EditForm from "@/components/EditForm";
 import { useRouter } from "next/router";
 import useSWR from "swr";
-import { useState } from "react";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 export default function EditFormPage() {
   const { mutate } = useSWR("/api/trips");
   const router = useRouter();
-
-  const [endDateDisabled, setEndDateDisabled] = useState(false);
 
   const { id } = router.query;
   const { data: trip, isLoading } = useSWR(
@@ -33,6 +30,7 @@ export default function EditFormPage() {
     const repTripDataCountry = tripData.country.name.replace(" ", "");
     const repTripDataCity = tripData.city.cityname.replace(" ", "-");
 
+
     const editedTrip = {
       title: tripData.title,
       location: [
@@ -50,9 +48,8 @@ export default function EditFormPage() {
         ? `https://source.unsplash.com/random/?${repTripDataCountry}-${repTripDataCity}`
         : `https://source.unsplash.com/random/?${repTripDataCountry}`,
     };
-    if (tripData.endDate < tripData.startDate) {
-      alert("The end date needs to be bigger than the start date!");
-    } else {
+
+    {
       try {
         const response = await fetch(`/api/trips/${id}`, {
           method: "PUT",
@@ -65,8 +62,6 @@ export default function EditFormPage() {
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
-
-        router.push(`/trip/${id}`);
       } catch (error) {
         console.error("Error updating trip:", error);
       }
@@ -80,8 +75,6 @@ export default function EditFormPage() {
       startDate={startDate}
       endDate={endDate}
       handleEditTrip={handleEditTrip}
-      toggleDisabled={toggleDisabled}
-      endDateDisabled={endDateDisabled}
     />
   );
 }

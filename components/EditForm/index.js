@@ -7,11 +7,25 @@ import {
   StyledSelect,
 } from "../TripForm/TripForm.styled";
 
+import {
+  StyledModalText,
+  StyledModalOkButton,
+  StyledOkLink,
+} from "../Modals/Modals.styled";
+
 import CancelButton from "@/components/CancelButton";
 import CancelIcon from "@/components/CancelButton/CancelIcon.svg";
-import CreateButton from "@/components/CreateButton";
+import SaveButton from "@/components/SaveButton";
 import CreateIcon from "@/components/CreateButton/CreateIcon.svg";
 import { useState } from "react";
+
+
+
+const MODAL_TYPES = {
+  SUCCESS: "SUCCESS",
+  DATE_ERROR: "DATE_ERROR",
+};
+
 
 export default function EditForm({
   country,
@@ -20,9 +34,8 @@ export default function EditForm({
   startDate,
   endDate,
   handleEditTrip,
-  toggleDisabled,
-  endDateDisabled,
 }) {
+
   const countries = Country.getAllCountries();
   const defaultIsoCode = countries.filter(({ name }) => name === country)[0]
     .isoCode;
@@ -30,6 +43,9 @@ export default function EditForm({
   const [isoCode, setIsoCode] = useState(defaultIsoCode);
   const cities = City.getCitiesOfCountry(isoCode);
   const [selectedCity, setSelectedCity] = useState(city);
+  const [startDateValue, setStartDateValue] = useState("");
+  const [endDateValue, setEndDateValue] = useState("");
+  const [modalType, setModalType] = useState(null);
 
   function handleIsoCode(event) {
     setIsoCode(event.target.value);
@@ -45,8 +61,44 @@ export default function EditForm({
     const data = Object.fromEntries(new FormData(event.target));
     const isoCode = event.target.country.value;
     const { name } = Country.getCountryByCode(isoCode);
-
+    const newEndDate = event.target.endDate.value;
+    const newStartDate = event.target.startDate.value;
     const chosenCity = cities.find((city) => city.name === selectedCity);
+
+if (newEndDate < newStartDate) {
+      setModalType(MODAL_TYPES.DATE_ERROR);
+
+      return;
+    }
+    setModalType(MODAL_TYPES.SUCCESS);
+    handleEditTrip(tripData);
+  }
+  function handleClose() {
+    setEndDateValue("");
+    setModalType(null);
+  }
+  function getModalContent() {
+    if (modalType === MODAL_TYPES.DATE_ERROR) {
+      return (
+        <>
+          <StyledModalText>
+            The end date should not come before the start date.
+          </StyledModalText>
+
+          <StyledModalOkButton onClick={handleClose}>Ok</StyledModalOkButton>
+        </>
+      );    
+}
+    if (modalType === MODAL_TYPES.SUCCESS) {
+      return (
+        <>
+          <StyledModalText>
+            Your trip has been successfully edited.
+          </StyledModalText>
+          <StyledOkLink href="/">Ok</StyledOkLink>
+        </>
+      );
+    }
 
     handleEditTrip({
       ...data,
@@ -109,7 +161,7 @@ export default function EditForm({
             type="date"
             defaultValue={startDate}
             required
-            onChange={toggleDisabled}
+            onChange={(event) => setStartDateValue(event.target.value)}
           />
         </StyledLabel>
         <StyledLabel>
@@ -118,12 +170,17 @@ export default function EditForm({
             name="endDate"
             type="date"
             defaultValue={endDate}
-            disabled={endDateDisabled}
+            disabled={!startDate}
+            onChange={(event) => setEndDateValue(event.target.value)}
           />
         </StyledLabel>
-        <CreateButton>
+        <SaveButton
+          modalType={modalType}
+          handleClose={handleClose}
+          modalContent={getModalContent}
+        >
           <CreateIcon /> Save
-        </CreateButton>
+        </SaveButton>
       </StyledForm>
       <StyledContainer>
         <CancelButton>

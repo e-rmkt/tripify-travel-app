@@ -6,12 +6,21 @@ import {
   StyledLabel,
   StyledSelect,
 } from "./TripForm.styled";
-
+import {
+  StyledModalText,
+  StyledOkLink,
+  StyledModalOkButton,
+} from "../Modals/Modals.styled";
 import CancelButton from "@/components/CancelButton";
 import CancelIcon from "@/components/CancelButton/CancelIcon.svg";
 import CreateButton from "@/components/CreateButton";
 import CreateIcon from "@/components/CreateButton/CreateIcon.svg";
 import { useState } from "react";
+
+const MODAL_TYPES = {
+  SUCCESS: "SUCCESS",
+  DATE_ERROR: "DATE_ERROR",
+};
 
 export default function TripForm({
   handleAddTrip,
@@ -21,6 +30,9 @@ export default function TripForm({
   const countries = Country.getAllCountries();
   const [isoCode, setIsoCode] = useState(countries.isoCode);
   const cities = City.getCitiesOfCountry(isoCode);
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [modalType, setModalType] = useState(null);
 
   function handleIsoCode(event) {
     setIsoCode(event.target.value);
@@ -35,6 +47,39 @@ export default function TripForm({
     const [lat, long, cityname] = coordinates;
     const latitude = Number(lat).toFixed(4);
     const longitude = Number(long).toFixed(4);
+
+if (endDate < startDate) {
+      setModalType(MODAL_TYPES.DATE_ERROR);
+      return;
+    }
+    setModalType(MODAL_TYPES.SUCCESS);
+    handleAddTrip(tripData);
+  }
+  function handleClose() {
+    setEndDate("");
+    setModalType(null);
+  }
+  function getModalContent() {
+    if (modalType === MODAL_TYPES.DATE_ERROR) {
+      return (
+        <>
+          <StyledModalText>
+            The end date should not come before the start date.
+          </StyledModalText>
+          <StyledModalOkButton onClick={handleClose}>Ok</StyledModalOkButton>
+        </>
+      );
+    }
+    if (modalType === MODAL_TYPES.SUCCESS) {
+      return (
+        <>
+          <StyledModalText>
+            Your trip has been successfully created.
+          </StyledModalText>
+          <StyledOkLink href="/">Ok</StyledOkLink>
+        </>
+      );
+    }
 
     handleAddTrip({
       ...data,
@@ -101,7 +146,13 @@ export default function TripForm({
         </StyledLabel>
         <StyledLabel>
           Start date
-          <StyledInput name="startDate" type="date" onChange={handleDisabled} />
+          <StyledInput
+            name="startDate"
+            type="date"
+            required
+            value={startDate}
+            onChange={(event) => {setStartDate(event.target.value); handleDisabled}}
+          />
         </StyledLabel>
         <StyledLabel>
           End date
@@ -109,10 +160,16 @@ export default function TripForm({
             name="endDate"
             type="date"
             required
-            disabled={endDateDisabled}
+            value={endDate}
+            disabled={!startDate}
+            onChange={(event) => setEndDate(event.target.value)}
           />
         </StyledLabel>
-        <CreateButton>
+        <CreateButton
+          modalType={modalType}
+          handleClose={handleClose}
+          modalContent={getModalContent}
+        >
           <CreateIcon /> Create
         </CreateButton>
       </StyledForm>

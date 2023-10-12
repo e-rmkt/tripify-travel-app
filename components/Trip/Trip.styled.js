@@ -9,7 +9,7 @@ export const StyledListItem = styled.li`
   background-color: #fff;
   padding: 12px;
   border-radius: 10px;
-  border: 1px solid rgba(68, 140, 255, 0.15);
+  border: 1px solid #0082ff26;
 `;
 
 export const Wrapper = styled.div`

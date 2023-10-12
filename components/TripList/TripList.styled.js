@@ -5,4 +5,5 @@ export const StyledUnorderedList = styled.ul`
   display: flex;
   flex-direction: column;
   padding: 0;
+  margin-bottom: 70px;
 `;

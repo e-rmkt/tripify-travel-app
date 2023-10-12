@@ -5,7 +5,6 @@ import {
   StyledText,
   Wrapper,
 } from "./TripDetails.styled";
-
 import Counter from "../Counter";
 import DeleteButton from "../DeleteButton";
 import EditButton from "../EditButton";
@@ -19,12 +18,12 @@ export default function TripDetails({
   location,
   timePeriod,
   img,
-  handleDelete,
   id,
   startDate,
   endDate,
   latitude,
   longitude,
+  handleDelete,
 }) {
   return (
     <>
@@ -42,7 +41,10 @@ export default function TripDetails({
       </DetailsCard>
       <Wrapper>
         <EditButton id={id} />
-        <DeleteButton onHandleDelete={handleDelete} />
+        <DeleteButton
+          onHandleDelete={handleDelete}
+          onClick={() => setShowModal(true)}
+        />
       </Wrapper>
     </>
   );
