@@ -29,6 +29,8 @@ To work locally, please install all of the following dependencies - You can use 
 - `npm i mongoose` to manage relationship between dataModel and MongoDB
 - `npm i date-fns` to return the distance between the given dates in words
 - `npm i swr` to fetch data
+- `npm i leaflet` to create a map and display it on the web page
+- `npm i copy-webpack-plugin -D` to copy files that already exist in the source tree, as part of the build process
 
 Run `npm run dev` to start a development server and open the displayed URL in a browser.
 
@@ -41,4 +43,4 @@ Run `npm run dev` to start a development server and open the displayed URL in a 
 
 - Basic Stack: “React”, “Next.js”, “Styled Components”
 - Backend: “Node.js”, “MongoDB Atlas”, “Mongoose”
-- Weitere Libraries & APIs: “useSWR”, “openmeteo”, “date-fns”, ”country-state-city”
+- Weitere Libraries & APIs: “useSWR”, “openmeteo”, “date-fns”, ”country-state-city”, "leaflet"
