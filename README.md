@@ -43,4 +43,4 @@ Run `npm run dev` to start a development server and open the displayed URL in a 
 
 - Basic Stack: “React”, “Next.js”, “Styled Components”
 - Backend: “Node.js”, “MongoDB Atlas”, “Mongoose”
-- Weitere Libraries & APIs: “useSWR”, “openmeteo”, “date-fns”, ”country-state-city”, "leaflet"
+- Weitere Libraries & APIs: “useSWR”, “openmeteo”, “date-fns”, ”country-state-city”, ”leaflet”, ”react-loading-skeleton”
