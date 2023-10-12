@@ -47,5 +47,4 @@ export const StyledSelect = styled.select`
     border: 1px solid #ffa573;
     outline: none;
   }
-  -webkit-appearance: menulist-textfield;
 `;

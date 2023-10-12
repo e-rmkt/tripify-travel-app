@@ -32,19 +32,17 @@ export default function TripDetailsPage() {
   const latitude = location.map((latitude) => `${latitude.latitude_city}`);
 
   return (
-    <>
-      <TripDetails
-        title={title}
-        location={location}
-        handleDelete={handleDelete}
-        img={img}
-        timePeriod={timePeriod}
-        id={id}
-        startDate={startDate}
-        endDate={endDate}
-        latitude={latitude}
-        longitude={longitude}
-      />
-    </>
+    <TripDetails
+      title={title}
+      location={location}
+      handleDelete={handleDelete}
+      img={img}
+      timePeriod={timePeriod}
+      id={id}
+      startDate={startDate}
+      endDate={endDate}
+      latitude={latitude}
+      longitude={longitude}
+    />
   );
 }

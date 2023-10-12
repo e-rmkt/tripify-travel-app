@@ -26,7 +26,7 @@ export const StyledButton = styled.button`
   color: #fff;
   font-size: 15px;
   font-weight: 500;
-  text-wrap: nowrap;
+  white-space: nowrap;
 `;
 
 export const Wrapper = styled.div`

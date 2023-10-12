@@ -1,5 +1,4 @@
 import { StyledButton, StyledListItem, Wrapper } from "./WeatherList.styled";
-
 import RainIcon from "@/components/WeatherList/RainIcon.svg";
 import { StyledUnorderedList } from "../TripList/TripList.styled";
 import TempIcon from "@/components/WeatherList/TempIcon.svg";
@@ -60,7 +59,7 @@ export default function WeatherList({ latitude, longitude }) {
         <WeatherIcon />
         {isHidden ? "Show Weather Forecast" : "Hide Weather Forecast"}
       </StyledButton>
-      {!isHidden ? (
+      {!isHidden && (
         <StyledUnorderedList>
           {dates.map((date, index) => (
             <StyledListItem key={date}>
@@ -86,7 +85,7 @@ export default function WeatherList({ latitude, longitude }) {
             </StyledListItem>
           ))}
         </StyledUnorderedList>
-      ) : null}
+      )}
     </>
   );
 }
