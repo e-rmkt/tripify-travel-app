@@ -65,18 +65,18 @@ export default function WeatherList({ latitude, longitude }) {
             <StyledListItem key={date}>
               <h3>{dates[index]}</h3>
               <Wrapper>
-                <TempIcon />
+                <TempIcon aria-label="maximum temperature" />
                 <h3>
                   {temperatures[index]}
                   {temperature_unit}
                 </h3>
               </Wrapper>
               <Wrapper>
-                <UVIcon />
+                <UVIcon aria-label="average UV index" />
                 <h3>{uv_index[index]}</h3>
               </Wrapper>
               <Wrapper>
-                <RainIcon />
+                <RainIcon aria-label="average precipitation probability" />
                 <h3>
                   {calculatedAverages[index]}
                   {precProbUnit}
