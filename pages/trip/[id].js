@@ -1,6 +1,6 @@
+import TripDetails from "@/components/TripDetails";
 import { useRouter } from "next/router";
 import useSWR from "swr";
-import TripDetails from "@/components/TripDetails";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
@@ -24,8 +24,12 @@ export default function TripDetailsPage() {
   }
 
   const { title, location, timePeriod, img } = trips;
+
   const startDate = timePeriod.map((timePeriod) => `${timePeriod.startDate}`);
   const endDate = timePeriod.map((timePeriod) => `${timePeriod.endDate}`);
+
+  const longitude = location.map((longitude) => `${longitude.longitude_city}`);
+  const latitude = location.map((latitude) => `${latitude.latitude_city}`);
 
   return (
     <TripDetails
@@ -37,6 +41,8 @@ export default function TripDetailsPage() {
       id={id}
       startDate={startDate}
       endDate={endDate}
+      latitude={latitude}
+      longitude={longitude}
     />
   );
 }

@@ -1,16 +1,16 @@
+import { City, Country } from "country-state-city";
 import {
   StyledContainer,
   StyledForm,
   StyledInput,
   StyledLabel,
+  StyledSelect,
 } from "./TripForm.styled";
-
 import {
   StyledModalText,
   StyledOkLink,
   StyledModalOkButton,
 } from "../Modals/Modals.styled";
-
 import CancelButton from "@/components/CancelButton";
 import CancelIcon from "@/components/CancelButton/CancelIcon.svg";
 import CreateButton from "@/components/CreateButton";
@@ -22,22 +22,48 @@ const MODAL_TYPES = {
   DATE_ERROR: "DATE_ERROR",
 };
 
-export default function TripForm({ handleAddTrip }) {
+export default function TripForm({ handleAddTrip, handleDisabled }) {
+  const countries = Country.getAllCountries();
+  const [isoCode, setIsoCode] = useState(countries.isoCode);
+  const cities = City.getCitiesOfCountry(isoCode);
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [modalType, setModalType] = useState(null);
 
-  function handleSubmit(event) {
+  function handleIsoCode(event) {
+    setIsoCode(event.target.value);
+  }
+
+  function onSubmit(event) {
     event.preventDefault();
-    const formData = new FormData(event.target);
-    const tripData = Object.fromEntries(formData);
+    const data = Object.fromEntries(new FormData(event.target));
+    const isoCode = event.target.country.value;
+    const { name } = Country.getCountryByCode(isoCode);
+    const coordinates = event.target.city.value.split("_");
+    const [lat, long, cityname] = coordinates;
+    const latitude = Number(lat).toFixed(4);
+    const longitude = Number(long).toFixed(4);
+
     if (endDate < startDate) {
       setModalType(MODAL_TYPES.DATE_ERROR);
       return;
     }
     setModalType(MODAL_TYPES.SUCCESS);
-    handleAddTrip(tripData);
+
+    handleAddTrip({
+      ...data,
+      country: {
+        name,
+        isoCode,
+      },
+      city: {
+        cityname,
+        longitude,
+        latitude,
+      },
+    });
   }
+
   function handleClose() {
     setEndDate("");
     setModalType(null);
@@ -67,20 +93,43 @@ export default function TripForm({ handleAddTrip }) {
 
   return (
     <>
-      <StyledForm onSubmit={handleSubmit}>
+      <StyledForm onSubmit={onSubmit}>
         <StyledLabel>
           Country
-          <StyledInput
+          <StyledSelect
             name="country"
-            placeholder="Country of your trip"
-            minLength={3}
+            onChange={handleIsoCode}
             required
-            autoFocus
-          />
+            maxMenuHeight={10}
+          >
+            <option selected hidden disabled>
+              Please select a country
+            </option>
+            {countries.map(({ isoCode, flag, name }) => (
+              <option key={isoCode} value={isoCode}>
+                {name} {flag}
+              </option>
+            ))}
+          </StyledSelect>
         </StyledLabel>
         <StyledLabel>
           City
-          <StyledInput name="city" placeholder="City of your trip" />
+          <StyledSelect name="city" required>
+            <option selected hidden disabled>
+              Please select a city
+            </option>
+
+            {cities
+              .filter(({ countryCode }) => countryCode === isoCode)
+              .map(({ latitude, longitude, name, stateCode }) => (
+                <option
+                  key={`${latitude}-${longitude}-${name}`}
+                  value={`${latitude}_${longitude}_${name}`}
+                >
+                  {name} - {stateCode}
+                </option>
+              ))}
+          </StyledSelect>
         </StyledLabel>
         <StyledLabel>
           Title
@@ -98,7 +147,10 @@ export default function TripForm({ handleAddTrip }) {
             type="date"
             required
             value={startDate}
-            onChange={(event) => setStartDate(event.target.value)}
+            onChange={(event) => {
+              setStartDate(event.target.value);
+              handleDisabled;
+            }}
           />
         </StyledLabel>
         <StyledLabel>
