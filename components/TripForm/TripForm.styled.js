@@ -37,7 +37,6 @@ export const StyledContainer = styled.div`
   margin-top: 13px;
 `;
 
-
 export const StyledSelect = styled.select`
   height: 30px;
   border-radius: 50px;
@@ -49,6 +48,7 @@ export const StyledSelect = styled.select`
     border: 1px solid #ffa573;
     outline: none;
   }
+`;
 
 export const StyledLink = styled(Link)`
   width: 100px;

@@ -19,13 +19,10 @@ import SaveButton from "@/components/SaveButton";
 import CreateIcon from "@/components/CreateButton/CreateIcon.svg";
 import { useState } from "react";
 
-
-
 const MODAL_TYPES = {
   SUCCESS: "SUCCESS",
   DATE_ERROR: "DATE_ERROR",
 };
-
 
 export default function EditForm({
   country,
@@ -35,7 +32,6 @@ export default function EditForm({
   endDate,
   handleEditTrip,
 }) {
-
   const countries = Country.getAllCountries();
   const defaultIsoCode = countries.filter(({ name }) => name === country)[0]
     .isoCode;
@@ -43,13 +39,10 @@ export default function EditForm({
   const [isoCode, setIsoCode] = useState(defaultIsoCode);
   const cities = City.getCitiesOfCountry(isoCode);
   const [selectedCity, setSelectedCity] = useState(city);
-  const [startDateValue, setStartDateValue] = useState("");
-  const [endDateValue, setEndDateValue] = useState("");
   const [modalType, setModalType] = useState(null);
 
   function handleIsoCode(event) {
     setIsoCode(event.target.value);
-    setDefaultCity();
   }
 
   function handleCity(event) {
@@ -65,40 +58,12 @@ export default function EditForm({
     const newStartDate = event.target.startDate.value;
     const chosenCity = cities.find((city) => city.name === selectedCity);
 
-if (newEndDate < newStartDate) {
+    if (newEndDate < newStartDate) {
       setModalType(MODAL_TYPES.DATE_ERROR);
 
       return;
     }
     setModalType(MODAL_TYPES.SUCCESS);
-    handleEditTrip(tripData);
-  }
-  function handleClose() {
-    setEndDateValue("");
-    setModalType(null);
-  }
-  function getModalContent() {
-    if (modalType === MODAL_TYPES.DATE_ERROR) {
-      return (
-        <>
-          <StyledModalText>
-            The end date should not come before the start date.
-          </StyledModalText>
-
-          <StyledModalOkButton onClick={handleClose}>Ok</StyledModalOkButton>
-        </>
-      );    
-}
-    if (modalType === MODAL_TYPES.SUCCESS) {
-      return (
-        <>
-          <StyledModalText>
-            Your trip has been successfully edited.
-          </StyledModalText>
-          <StyledOkLink href="/">Ok</StyledOkLink>
-        </>
-      );
-    }
 
     handleEditTrip({
       ...data,
@@ -112,6 +77,35 @@ if (newEndDate < newStartDate) {
         latitude: Number(chosenCity.latitude).toFixed(4),
       },
     });
+  }
+
+  function handleClose() {
+    setEndDateValue("");
+    setModalType(null);
+  }
+
+  function getModalContent() {
+    if (modalType === MODAL_TYPES.DATE_ERROR) {
+      return (
+        <>
+          <StyledModalText>
+            The end date should not come before the start date.
+          </StyledModalText>
+
+          <StyledModalOkButton onClick={handleClose}>Ok</StyledModalOkButton>
+        </>
+      );
+    }
+    if (modalType === MODAL_TYPES.SUCCESS) {
+      return (
+        <>
+          <StyledModalText>
+            Your trip has been successfully edited.
+          </StyledModalText>
+          <StyledOkLink href="/">Ok</StyledOkLink>
+        </>
+      );
+    }
   }
   return (
     <>
@@ -161,7 +155,6 @@ if (newEndDate < newStartDate) {
             type="date"
             defaultValue={startDate}
             required
-            onChange={(event) => setStartDateValue(event.target.value)}
           />
         </StyledLabel>
         <StyledLabel>
@@ -171,7 +164,6 @@ if (newEndDate < newStartDate) {
             type="date"
             defaultValue={endDate}
             disabled={!startDate}
-            onChange={(event) => setEndDateValue(event.target.value)}
           />
         </StyledLabel>
         <SaveButton

@@ -22,11 +22,7 @@ const MODAL_TYPES = {
   DATE_ERROR: "DATE_ERROR",
 };
 
-export default function TripForm({
-  handleAddTrip,
-  endDateDisabled,
-  handleDisabled,
-}) {
+export default function TripForm({ handleAddTrip, handleDisabled }) {
   const countries = Country.getAllCountries();
   const [isoCode, setIsoCode] = useState(countries.isoCode);
   const cities = City.getCitiesOfCountry(isoCode);
@@ -48,13 +44,26 @@ export default function TripForm({
     const latitude = Number(lat).toFixed(4);
     const longitude = Number(long).toFixed(4);
 
-if (endDate < startDate) {
+    if (endDate < startDate) {
       setModalType(MODAL_TYPES.DATE_ERROR);
       return;
     }
     setModalType(MODAL_TYPES.SUCCESS);
-    handleAddTrip(tripData);
+
+    handleAddTrip({
+      ...data,
+      country: {
+        name,
+        isoCode,
+      },
+      city: {
+        cityname,
+        longitude,
+        latitude,
+      },
+    });
   }
+
   function handleClose() {
     setEndDate("");
     setModalType(null);
@@ -80,19 +89,6 @@ if (endDate < startDate) {
         </>
       );
     }
-
-    handleAddTrip({
-      ...data,
-      country: {
-        name,
-        isoCode,
-      },
-      city: {
-        cityname,
-        longitude,
-        latitude,
-      },
-    });
   }
 
   return (
@@ -151,7 +147,10 @@ if (endDate < startDate) {
             type="date"
             required
             value={startDate}
-            onChange={(event) => {setStartDate(event.target.value); handleDisabled}}
+            onChange={(event) => {
+              setStartDate(event.target.value);
+              handleDisabled;
+            }}
           />
         </StyledLabel>
         <StyledLabel>
