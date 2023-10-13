@@ -6,7 +6,8 @@ import "leaflet/dist/leaflet.css";
 import useSWR from "swr";
 import { useRouter } from "next/router";
 import L from "leaflet";
-import Link from "next/link";
+import { StyledLink } from "./MapView.styled";
+import { StyledText } from "../Trip/Trip.styled";
 
 const StyledMap = styled.div`
   width: 100%;
@@ -42,25 +43,30 @@ export default function DynamicMap() {
           detectRetina={L.Browser.retina ? true : false}
         />
         {trips.map((trip) => (
-          <Link key={trip._id} href={`/trip/${trip._id}`}>
-            <Markers
-              places={[
-                {
-                  _id: trip._id,
-                  name: [
-                    trip.title,
-                    trip.location[0].city,
-                    trip.location[0].country,
-                  ],
-                  coordinates: [
-                    trip.location[0].latitude_city,
-                    trip.location[0].longitude_city,
-                  ],
-                },
-              ]}
-              currentPlace={{}}
-            ></Markers>
-          </Link>
+          <Markers
+            key={trip._id}
+            places={[
+              {
+                _id: trip._id,
+                name: (
+                  <>
+                    <h2>
+                      {trip.location[0].city}, {trip.location[0].country}
+                    </h2>
+                    <StyledText>{trip.title}</StyledText>
+                    <StyledLink href={`/trip/${trip._id}`}>
+                      Details Page
+                    </StyledLink>
+                  </>
+                ),
+                coordinates: [
+                  trip.location[0].latitude_city,
+                  trip.location[0].longitude_city,
+                ],
+              },
+            ]}
+            currentPlace={{}}
+          ></Markers>
         ))}
       </MapContainer>
     </StyledMap>
@@ -89,9 +95,7 @@ function Markers({ places = [], currentPlace }) {
           position={coordinates}
           ref={_id === currentPlace?._id ? currentMarker : null}
         >
-          <Popup>
-            <h2>{name}</h2>
-          </Popup>
+          <Popup>{name}</Popup>
         </Marker>
       ))}
     </>
