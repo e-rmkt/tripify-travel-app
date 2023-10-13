@@ -4,7 +4,9 @@ import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import useLeafletConfig from "@/hooks/useLeafletConfig";
 import "leaflet/dist/leaflet.css";
 import useSWR from "swr";
+import { useRouter } from "next/router";
 import L from "leaflet";
+import Link from "next/link";
 
 const StyledMap = styled.div`
   width: 100%;
@@ -24,6 +26,7 @@ const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 export default function DynamicMap() {
   useLeafletConfig();
+  const router = useRouter();
   const { data: trips } = useSWR("/api/trips", fetcher);
 
   if (!trips) {
@@ -38,12 +41,27 @@ export default function DynamicMap() {
           url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png"
           detectRetina={L.Browser.retina ? true : false}
         />
-        <Markers
-          places={[
-            { _id: 1, name: "lisbon", coordinates: [38.7077507, -9.1365919] },
-          ]}
-          currentPlace={{}}
-        />
+        {trips.map((trip) => (
+          <Link key={trip._id} href={`/trip/${trip._id}`}>
+            <Markers
+              places={[
+                {
+                  _id: trip._id,
+                  name: [
+                    trip.title,
+                    trip.location[0].city,
+                    trip.location[0].country,
+                  ],
+                  coordinates: [
+                    trip.location[0].latitude_city,
+                    trip.location[0].longitude_city,
+                  ],
+                },
+              ]}
+              currentPlace={{}}
+            ></Markers>
+          </Link>
+        ))}
       </MapContainer>
     </StyledMap>
   );
