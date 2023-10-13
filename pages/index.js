@@ -1,12 +1,11 @@
-import CreateTrip from "@/components/CreateTrip";
-import TripList from "@/components/TripList";
+import Link from "next/link";
+import { Main } from "@/components/Layout/Layout.styled";
 
-export default function HomePage() {
+export default function LandingPage() {
   return (
-    <main>
-      <h1>My Trips</h1>
-      <TripList />
-      <CreateTrip />
-    </main>
+    <Main>
+      <h1>Tripify</h1>
+      <Link href="/triplist">View my trips →</Link>
+    </Main>
   );
 }

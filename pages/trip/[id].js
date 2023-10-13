@@ -1,6 +1,6 @@
+import TripDetails from "@/components/TripDetails";
 import { useRouter } from "next/router";
 import useSWR from "swr";
-import TripDetails from "@/components/TripDetails";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
@@ -20,7 +20,7 @@ export default function TripDetailsPage() {
     await fetch(`/api/trips/${id}`, {
       method: "DELETE",
     });
-    router.push("/");
+    router.push("/triplist");
   }
 
   const { title, location, timePeriod, img } = trips;
