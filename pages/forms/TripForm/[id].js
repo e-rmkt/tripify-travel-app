@@ -63,6 +63,7 @@ export default function EditFormPage() {
       startDate={startDate}
       endDate={endDate}
       handleEditTrip={handleEditTrip}
+      id={id}
     />
   );
 }
