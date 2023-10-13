@@ -12,6 +12,7 @@ import EditButton from "../EditButton";
 import DeleteButton from "../DeleteButton";
 import Counter from "../Counter";
 import { BackButton } from "../Layout/Layout.styled";
+import WeatherList from "../WeatherList";
 
 export default function TripDetails({
   title,
@@ -21,6 +22,8 @@ export default function TripDetails({
   id,
   startDate,
   endDate,
+  latitude,
+  longitude,
   handleDelete,
 }) {
   const router = useRouter();
@@ -36,6 +39,7 @@ export default function TripDetails({
         <StyledText>{title}</StyledText>
         <TimePeriod timePeriod={timePeriod} />
         <Counter startDate={startDate} endDate={endDate} />
+        <WeatherList latitude={latitude} longitude={longitude} />
       </DetailsCard>
       <Wrapper>
         <EditButton id={id} />
