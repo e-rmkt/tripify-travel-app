@@ -17,7 +17,7 @@ export const Wrapper = styled.div`
   flex-flow: column wrap;
   align-items: center;
   gap: 10px;
-  margin-top: 35px;
+  margin: 35px 0;
 `;
 
 export const StyledText = styled.p`

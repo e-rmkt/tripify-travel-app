@@ -1,5 +1,5 @@
-import styled from "styled-components";
 import Link from "next/link";
+import styled from "styled-components";
 
 export const StyledForm = styled.form`
   display: flex;
@@ -60,4 +60,10 @@ export const StyledNoButton = styled.button`
   background-color: #6d6d6d;
   border: 1px solid;
   border-radius: 13px;
+`;
+export const Span = styled.span`
+  font-size: 11px;
+  color: #9c9c9c;
+  align-self: flex-end;
+  margin-right: 30px;
 `;
