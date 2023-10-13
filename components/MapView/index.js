@@ -1,22 +1,12 @@
 import { useEffect, useRef } from "react";
-import styled from "styled-components";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import useLeafletConfig from "@/hooks/useLeafletConfig";
 import "leaflet/dist/leaflet.css";
 import useSWR from "swr";
 import { useRouter } from "next/router";
 import L from "leaflet";
-import { StyledLink } from "./MapView.styled";
+import { StyledLink, StyledMap } from "./MapView.styled";
 import { StyledText } from "../Trip/Trip.styled";
-
-const StyledMap = styled.div`
-  width: 100%;
-  height: 100%;
-  .leaflet-container {
-    width: 100%;
-    height: 100%;
-  }
-`;
 
 const MAP_CONFIG = {
   center: [52.52, 13.405], // Berlin

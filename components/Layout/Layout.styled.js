@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import Link from "next/link";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -8,4 +7,9 @@ export const Wrapper = styled.div`
   align-items: center;
   height: 25px;
   margin-top: 15px;
+`;
+
+export const BackButton = styled.button`
+  border-style: none;
+  background-color: transparent;
 `;

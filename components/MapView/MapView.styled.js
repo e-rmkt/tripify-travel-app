@@ -16,3 +16,13 @@ export const StyledLink = styled(Link)`
     color: #ffffff;
   }
 `;
+
+export const StyledMap = styled.div`
+  width: 100%;
+  height: 85%;
+  .leaflet-container {
+    width: 100%;
+    height: 100%;
+  }
+  margin-top: 10px;
+`;
