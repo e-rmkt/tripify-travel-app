@@ -128,12 +128,12 @@ export default function EditForm({
           handleClose={handleClose}
           modalContent={getModalContent}
         >
-          <CreateIcon /> Save
+          <CreateIcon aria-label="Icon in form of a checkmark" /> Save
         </SaveButton>
       </StyledForm>
       <StyledContainer>
         <CancelButton>
-          <CancelIcon />
+          <CancelIcon aria-label="Icon in form of a cross" />
           Cancel
         </CancelButton>
       </StyledContainer>

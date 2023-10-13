@@ -1,19 +1,20 @@
-import DeleteIcon from "@/components/DeleteButton/DeleteIcon.svg";
-import { StyledDeleteButton } from "./DeleteButton.styled";
-import Modal from "../Modals";
-import { useState } from "react";
 import {
-  StyledModalYesButton,
   StyledModalNoButton,
+  StyledModalYesButton,
   StyledWrapper,
 } from "../Modals/Modals.styled";
+
+import DeleteIcon from "@/components/DeleteButton/DeleteIcon.svg";
+import Modal from "../Modals";
+import { StyledDeleteButton } from "./DeleteButton.styled";
+import { useState } from "react";
 
 export default function DeleteButton({ onHandleDelete, handleClose }) {
   const [showModal, setShowModal] = useState(false);
   return (
     <>
       <StyledDeleteButton type="button" onClick={() => setShowModal(true)}>
-        <DeleteIcon />
+        <DeleteIcon aria-label="Icon in form of a trash can" />
         Delete
       </StyledDeleteButton>
       {showModal && (
