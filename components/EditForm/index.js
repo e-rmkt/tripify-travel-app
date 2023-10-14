@@ -6,17 +6,16 @@ import {
   StyledLabel,
   StyledSelect,
 } from "../TripForm/TripForm.styled";
-
 import {
-  StyledModalText,
   StyledModalOkButton,
+  StyledModalText,
   StyledOkLink,
 } from "../Modals/Modals.styled";
 
 import CancelButton from "@/components/CancelButton";
 import CancelIcon from "@/components/CancelButton/CancelIcon.svg";
-import SaveButton from "@/components/SaveButton";
 import CreateIcon from "@/components/CreateButton/CreateIcon.svg";
+import SaveButton from "@/components/SaveButton";
 import { useState } from "react";
 
 const MODAL_TYPES = {
@@ -31,6 +30,7 @@ export default function EditForm({
   startDate,
   endDate,
   handleEditTrip,
+  id,
 }) {
   const countries = Country.getAllCountries();
   const defaultIsoCode = countries.filter(({ name }) => name === country)[0]
@@ -102,7 +102,7 @@ export default function EditForm({
           <StyledModalText>
             Your trip has been successfully edited.
           </StyledModalText>
-          <StyledOkLink href="/">Ok</StyledOkLink>
+          <StyledOkLink href={`/trip/${id}`}>Ok</StyledOkLink>
         </>
       );
     }
@@ -171,12 +171,12 @@ export default function EditForm({
           handleClose={handleClose}
           modalContent={getModalContent}
         >
-          <CreateIcon /> Save
+          <CreateIcon aria-label="Icon in form of a checkmark" /> Save
         </SaveButton>
       </StyledForm>
       <StyledContainer>
         <CancelButton>
-          <CancelIcon />
+          <CancelIcon aria-label="Icon in form of a cross" />
           Cancel
         </CancelButton>
       </StyledContainer>

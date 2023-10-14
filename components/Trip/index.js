@@ -1,4 +1,5 @@
 import {
+  ImageContainer,
   StyledImage,
   StyledLink,
   StyledListItem,
@@ -6,9 +7,9 @@ import {
   Wrapper,
 } from "./Trip.styled";
 
+import Counter from "../Counter";
 import Location from "../Location";
 import TimePeriod from "../TimePeriod";
-import Counter from "../Counter";
 
 export default function Trip({ title, img, location, timePeriod, _id }) {
   const startDate = timePeriod.map((timePeriod) => `${timePeriod.startDate}`);
@@ -17,7 +18,9 @@ export default function Trip({ title, img, location, timePeriod, _id }) {
   return (
     <StyledLink href={`/trip/${_id}`}>
       <StyledListItem>
-        <StyledImage src={img} width={120} height={100} alt="Dummy Pic" />
+        <ImageContainer>
+          <StyledImage src={img} fill={true} alt="Dummy Pic" />
+        </ImageContainer>
         <Wrapper>
           <Location location={location} />
           <StyledText>{title}</StyledText>

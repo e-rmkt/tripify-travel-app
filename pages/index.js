@@ -1,20 +1,11 @@
-import CreateTrip from "@/components/CreateTrip";
-import TripList from "@/components/TripList";
-import { Wrapper } from "@/components/Layout/Layout.styled";
-import MapIcon from "@/components/Layout/MapIcon.svg";
-import Link from "next/link";
+import { Main, StyledLink } from "@/components/Layout/Layout.styled";
+import Logo from "@/components/Layout/Logo.svg";
 
-export default function HomePage() {
+export default function LandingPage() {
   return (
-    <main>
-      <Wrapper>
-        <h1>My Trips</h1>
-        <Link href="/worldMap">
-          <MapIcon />
-        </Link>
-      </Wrapper>
-      <TripList />
-      <CreateTrip />
-    </main>
+    <Main>
+      <Logo />
+      <StyledLink href="/triplist">View my trips</StyledLink>
+    </Main>
   );
 }

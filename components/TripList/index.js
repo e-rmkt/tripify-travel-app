@@ -7,9 +7,9 @@ import Skeleton from "react-loading-skeleton";
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 export default function TripList() {
-  const { data: trips, isLoading } = useSWR(`/api/trips`, fetcher);
+  const { data, isLoading } = useSWR(`/api/trips`, fetcher);
 
-  if (!trips || isLoading) {
+  if (!data || isLoading) {
     return (
       <Skeleton
         count={6}
@@ -23,6 +23,13 @@ export default function TripList() {
       />
     );
   }
+
+  const trips = data.sort((a, b) => {
+    const dateA = new Date(a.timePeriod[0].startDate);
+    const dateB = new Date(b.timePeriod[0].startDate);
+    const result = dateA - dateB;
+    return result;
+  });
 
   return (
     <StyledUnorderedList>

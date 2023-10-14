@@ -1,5 +1,6 @@
 import { City, Country } from "country-state-city";
 import {
+  Span,
   StyledContainer,
   StyledForm,
   StyledInput,
@@ -7,9 +8,9 @@ import {
   StyledSelect,
 } from "./TripForm.styled";
 import {
+  StyledModalOkButton,
   StyledModalText,
   StyledOkLink,
-  StyledModalOkButton,
 } from "../Modals/Modals.styled";
 import CancelButton from "@/components/CancelButton";
 import CancelIcon from "@/components/CancelButton/CancelIcon.svg";
@@ -164,17 +165,18 @@ export default function TripForm({ handleAddTrip, handleDisabled }) {
             onChange={(event) => setEndDate(event.target.value)}
           />
         </StyledLabel>
+        <Span>All fields are required</Span>
         <CreateButton
           modalType={modalType}
           handleClose={handleClose}
           modalContent={getModalContent}
         >
-          <CreateIcon /> Create
+          <CreateIcon aria-label="Icon in form of a checkmark" /> Create
         </CreateButton>
       </StyledForm>
       <StyledContainer>
         <CancelButton>
-          <CancelIcon /> Cancel
+          <CancelIcon aria-label="Icon in form of a cross" /> Cancel
         </CancelButton>
       </StyledContainer>
     </>

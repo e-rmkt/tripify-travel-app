@@ -20,7 +20,7 @@ export default function TripDetailsPage() {
     await fetch(`/api/trips/${id}`, {
       method: "DELETE",
     });
-    router.push("/");
+    router.push("/triplist");
   }
 
   const { title, location, timePeriod, img } = trips;

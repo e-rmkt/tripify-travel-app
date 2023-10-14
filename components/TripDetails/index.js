@@ -1,16 +1,18 @@
 import {
   DetailsCard,
   Header,
+  ImageContainer,
   StyledImage,
   StyledText,
   Wrapper,
 } from "./TripDetails.styled";
-import { useRouter } from "next/router";
+import Counter from "../Counter";
+import DeleteButton from "../DeleteButton";
+import EditButton from "../EditButton";
+import Link from "next/link";
 import Location from "../Location";
 import TimePeriod from "../TimePeriod";
-import EditButton from "../EditButton";
-import DeleteButton from "../DeleteButton";
-import Counter from "../Counter";
+import { useRouter } from "next/router";
 import { BackButton } from "../Layout/Layout.styled";
 import WeatherList from "../WeatherList";
 
@@ -33,7 +35,9 @@ export default function TripDetails({
         <h1>Your Trip</h1>
         <BackButton onClick={() => router.back()}>← back</BackButton>
       </Header>
-      <StyledImage src={img} width={335} height={300} alt="Dummy Pic" />
+      <ImageContainer>
+        <StyledImage src={img} fill={true} alt="Dummy Pic" />
+      </ImageContainer>
       <DetailsCard>
         <Location location={location} />
         <StyledText>{title}</StyledText>

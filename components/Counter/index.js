@@ -1,6 +1,7 @@
-import { formatDistanceToNow } from "date-fns";
 import { StyledCounter, Wrapper } from "./Counter.styled";
+
 import CounterIcon from "@/components/Counter/CounterIcon.svg";
+import { formatDistanceToNow } from "date-fns";
 
 export default function Counter({ startDate, endDate }) {
   const now = new Date();
@@ -9,7 +10,7 @@ export default function Counter({ startDate, endDate }) {
     const countdown = formatDistanceToNow(start);
     return (
       <Wrapper>
-        <CounterIcon />
+        <CounterIcon aria-label="Icon in form of a clock" />
         <StyledCounter>in {countdown}</StyledCounter>
       </Wrapper>
     );
@@ -18,7 +19,7 @@ export default function Counter({ startDate, endDate }) {
   if (now >= start && now <= end) {
     return (
       <Wrapper>
-        <CounterIcon />
+        <CounterIcon aria-label="Icon in form of a clock" />
         <StyledCounter>Ongoing</StyledCounter>
       </Wrapper>
     );
@@ -26,7 +27,7 @@ export default function Counter({ startDate, endDate }) {
   const countdown = formatDistanceToNow(end, now);
   return (
     <Wrapper>
-      <CounterIcon />
+      <CounterIcon aria-label="Icon in form of a clock" />
       <StyledCounter>{countdown} ago</StyledCounter>
     </Wrapper>
   );

@@ -17,7 +17,7 @@ export const Wrapper = styled.div`
   flex-flow: column wrap;
   align-items: center;
   gap: 10px;
-  margin-top: 35px;
+  margin: 35px 0;
 `;
 
 export const StyledText = styled.p`
@@ -28,4 +28,12 @@ export const StyledText = styled.p`
 
 export const StyledImage = styled(Image)`
   border-radius: 13px;
+  object-fit: cover;
+`;
+
+export const ImageContainer = styled.div`
+  position: relative;
+  overflow: hidden;
+  height: 300px;
+  width: 335px;
 `;
