@@ -1,11 +1,12 @@
-import Link from "next/link";
-import { Main } from "@/components/Layout/Layout.styled";
+import { Main, StyledLink } from "@/components/Layout/Layout.styled";
+
+import Logo from "@/components/Layout/Logo.svg";
 
 export default function LandingPage() {
   return (
     <Main>
-      <h1>Tripify</h1>
-      <Link href="/triplist">View my trips →</Link>
+      <Logo />
+      <StyledLink href="/triplist">View my trips</StyledLink>
     </Main>
   );
 }
