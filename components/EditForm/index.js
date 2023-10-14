@@ -82,7 +82,6 @@ export default function EditForm({
   }
 
   function handleClose() {
-    setEndDateValue("");
     setModalType(null);
   }
 
@@ -93,7 +92,6 @@ export default function EditForm({
           <StyledModalText>
             The end date should not come before the start date.
           </StyledModalText>
-
           <StyledModalOkButton onClick={handleClose}>Ok</StyledModalOkButton>
         </>
       );
