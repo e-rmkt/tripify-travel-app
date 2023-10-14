@@ -86,7 +86,7 @@ export default function TripForm({ handleAddTrip, handleDisabled }) {
           <StyledModalText>
             Your trip has been successfully created.
           </StyledModalText>
-          <StyledOkLink href="/">Ok</StyledOkLink>
+          <StyledOkLink href="/triplist">Ok</StyledOkLink>
         </>
       );
     }
