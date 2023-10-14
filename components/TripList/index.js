@@ -19,6 +19,7 @@ export default function TripList() {
           border: "1px solid rgba(68, 140, 255, 0.15)",
           marginBottom: "20px",
           zIndex: -10,
+          marginTop: "10px",
         }}
       />
     );
