@@ -1,6 +1,6 @@
 import Trip from "../Trip";
 import useSWR from "swr";
-import { StyledUnorderedList } from "./TripList.styled";
+import { StyledUnorderedList, WhiteSpace } from "./TripList.styled";
 import "react-loading-skeleton/dist/skeleton.css";
 import Skeleton from "react-loading-skeleton";
 
@@ -25,18 +25,54 @@ export default function TripList() {
     );
   }
 
-  const trips = data.sort((a, b) => {
+  data.sort((a, b) => {
     const dateA = new Date(a.timePeriod[0].startDate);
     const dateB = new Date(b.timePeriod[0].startDate);
     const result = dateA - dateB;
     return result;
   });
 
+  const currentDate = new Date();
+
+  const pastTrips = data
+    .filter((trip) => {
+      const endDate = new Date(trip.timePeriod[0].endDate);
+      return endDate < currentDate;
+    })
+    .sort((a, b) => {});
+
+  const futureTrips = data.filter((trip) => {
+    const startDate = new Date(trip.timePeriod[0].startDate);
+    return startDate > currentDate;
+  });
+
+  const ongoingTrips = data.filter((trip) => {
+    const startDate = new Date(trip.timePeriod[0].startDate);
+    const endDate = new Date(trip.timePeriod[0].endDate);
+    return endDate > currentDate && startDate < currentDate;
+  });
+
   return (
-    <StyledUnorderedList>
-      {trips.map((trip) => (
-        <Trip key={trip._id} {...trip} />
-      ))}
-    </StyledUnorderedList>
+    <>
+      <h2>Ongoing Trips</h2>
+      <StyledUnorderedList>
+        {ongoingTrips.map((trip) => (
+          <Trip key={trip._id} {...trip} />
+        ))}
+      </StyledUnorderedList>
+      <h2>Future Trips</h2>
+      <StyledUnorderedList>
+        {futureTrips.map((trip) => (
+          <Trip key={trip._id} {...trip} />
+        ))}
+      </StyledUnorderedList>
+      <h2>Past Trips</h2>
+      <StyledUnorderedList>
+        {pastTrips.map((trip) => (
+          <Trip key={trip._id} {...trip} />
+        ))}
+      </StyledUnorderedList>
+      <WhiteSpace></WhiteSpace>
+    </>
   );
 }

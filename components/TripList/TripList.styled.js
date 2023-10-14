@@ -5,5 +5,9 @@ export const StyledUnorderedList = styled.ul`
   display: flex;
   flex-direction: column;
   padding: 0;
-  margin-bottom: 70px;
+  margin-bottom: 20px;
+`;
+
+export const WhiteSpace = styled.div`
+  height: 50px;
 `;
