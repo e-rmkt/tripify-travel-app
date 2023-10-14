@@ -38,4 +38,5 @@ export const ImageContainer = styled.div`
   overflow: hidden;
   height: 108px;
   width: 120px;
+  min-width: 120px;
 `;

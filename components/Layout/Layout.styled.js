@@ -27,7 +27,8 @@ export const StyledLink = styled(Link)`
   }
   &:visited {
     color: #fff;
-  }`;
+  }
+`;
 
 export const Wrapper = styled.div`
   display: flex;
@@ -36,6 +37,7 @@ export const Wrapper = styled.div`
   align-items: center;
   height: 25px;
   margin-top: 15px;
+  margin-bottom: 20px;
 `;
 
 export const BackButton = styled.button`

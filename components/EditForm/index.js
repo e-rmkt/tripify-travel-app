@@ -17,6 +17,7 @@ import CancelIcon from "@/components/CancelButton/CancelIcon.svg";
 import CreateIcon from "@/components/CreateButton/CreateIcon.svg";
 import SaveButton from "@/components/SaveButton";
 import { useState } from "react";
+import { useRouter } from "next/router";
 
 const MODAL_TYPES = {
   SUCCESS: "SUCCESS",
@@ -32,6 +33,7 @@ export default function EditForm({
   handleEditTrip,
   id,
 }) {
+  const router = useRouter();
   const countries = Country.getAllCountries();
   const defaultIsoCode = countries.filter(({ name }) => name === country)[0]
     .isoCode;
@@ -80,7 +82,6 @@ export default function EditForm({
   }
 
   function handleClose() {
-    setEndDateValue("");
     setModalType(null);
   }
 
@@ -91,7 +92,6 @@ export default function EditForm({
           <StyledModalText>
             The end date should not come before the start date.
           </StyledModalText>
-
           <StyledModalOkButton onClick={handleClose}>Ok</StyledModalOkButton>
         </>
       );
@@ -102,7 +102,9 @@ export default function EditForm({
           <StyledModalText>
             Your trip has been successfully edited.
           </StyledModalText>
-          <StyledOkLink href={`/trip/${id}`}>Ok</StyledOkLink>
+          <StyledModalOkButton onClick={() => router.back()}>
+            Ok
+          </StyledModalOkButton>
         </>
       );
     }
