@@ -12,12 +12,19 @@ export default function TripFormPage() {
   }
 
   async function handleAddTrip(tripData) {
-    const repTripDataCountry = tripData.country.replace(" ", "");
-    const repTripDataCity = tripData.city.replace(" ", "-");
+    const repTripDataCountry = tripData.country.name.replace(" ", "");
+    const repTripDataCity = tripData.city.cityname.replace(" ", "-");
 
     const newTrip = {
       title: tripData.title,
-      location: [{ country: tripData.country, city: tripData.city }],
+      location: [
+        {
+          country: tripData.country.name,
+          city: tripData.city.cityname,
+          latitude_city: tripData.city.latitude,
+          longitude_city: tripData.city.longitude,
+        },
+      ],
       timePeriod: [
         { startDate: tripData.startDate, endDate: tripData.endDate },
       ],
@@ -30,7 +37,6 @@ export default function TripFormPage() {
       alert("The end date needs to be bigger than the start date!");
       return;
     }
-
     const response = await fetch("/api/trips", {
       method: "POST",
       headers: {
@@ -39,11 +45,11 @@ export default function TripFormPage() {
       body: JSON.stringify(newTrip),
     });
 
+
     if (!response.ok) {
       console.error(response.status);
       return;
     }
-
     mutate();
   }
 

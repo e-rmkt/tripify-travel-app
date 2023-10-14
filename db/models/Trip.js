@@ -8,6 +8,8 @@ const tripSchema = new Schema({
     {
       country: { type: String, required: true },
       city: { type: String },
+      latitude_city: { type: String },
+      longitude_city: { type: String },
     },
   ],
   timePeriod: [
